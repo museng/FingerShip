@@ -1,0 +1,103 @@
+/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
+
+#include "meteor.h"
+#include "../engine/basic_functions.h"
+#include "../engine/game_core.h"
+#include "../engine/locale.h"
+#include "../engine/effects.h"
+#include <cmath>
+
+CMeteor::CMeteor(sf::Vector2f pos)
+: CEntity(CEntity::METEOR)
+{
+	m_Position = pos;
+
+
+	sf::Vector2f rawDir(0.0f, 1.0f);
+	if (Core()->Player()->m_pCharacter)
+		rawDir = Core()->Player()->m_pCharacter->getPosition() - m_Position;
+	m_Dir = sf::Vector2f(rawDir.x, rawDir.y);
+	m_Dir = vector_normalize(m_Dir);
+
+	int rand = random_int(TILE_SIZE/2, TILE_SIZE);
+	sf::Vector2f size(rand, rand);
+	m_CollChar = sf::RectangleShape(size);
+	m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
+	m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_METEOR_1 + random_int(0, 2)));
+
+	m_Vel = random_int(1, 3);
+	m_RotDir = random_int(-5, 5);
+}
+CMeteor::CMeteor(sf::Vector2f pos, sf::Vector2f dir, int sizel)
+: CEntity(CEntity::METEOR)
+{
+	m_Dir = dir;
+	m_Position = pos;
+
+	int rand = random_int(sizel/4, sizel/2);
+	if (rand <= 20)
+		setToDelete();
+
+	sf::Vector2f size(rand, rand);
+	m_CollChar = sf::RectangleShape(size);
+	m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
+	m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_METEOR_1 + random_int(0, 2)));
+
+	m_Vel = random_int(1, 3);
+	m_RotDir = random_int(-5, 5);
+}
+CMeteor::~CMeteor()
+{ }
+
+void CMeteor::destroy()
+{
+	CEffects::createTrashSpark(m_Position);
+
+	CEntity::destroy();
+}
+
+
+void CMeteor::tick()
+{
+	float vel = Core()->getGameSpeed();
+	m_Position = sf::Vector2f(m_Position.x + m_Dir.x * vel, m_Position.y + m_Dir.y * vel);
+
+	if (m_Position.y > RSIZE_H + m_CollChar.getSize().y || m_Position.x+m_CollChar.getLocalBounds().width/2 < 0 || m_Position.x-m_CollChar.getLocalBounds().width/2 > RSIZE_W)
+	{
+		setToDelete();
+		return;
+	}
+
+	m_CollChar.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
+	m_CollChar.setRotation(m_CollChar.getRotation()+m_RotDir);
+
+	Core()->Window()->draw(m_CollChar);
+
+    if (!Core()->m_AsteroidKilled)
+    {
+    	sf::RectangleShape rectShape(sf::Vector2f(m_CollChar.getSize().x, m_CollChar.getSize().y));
+    	rectShape.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
+    	rectShape.setFillColor(sf::Color::Transparent);
+    	rectShape.setOutlineThickness(2.0f);
+    	rectShape.setOutlineColor(sf::Color::Red);
+    	rectShape.setOrigin(sf::Vector2f(m_CollChar.getSize().x/2, m_CollChar.getSize().y/2));
+    	Core()->Window()->draw(rectShape);
+
+        sf::Vertex line[] =
+        {
+            sf::Vertex(sf::Vector2f(m_Position.x - m_CollChar.getSize().x/2, m_Position.y - m_CollChar.getSize().y/2 - 1.0f), sf::Color::Red),
+            sf::Vertex(sf::Vector2f(m_Position.x - m_CollChar.getSize().x/2 + 200.0f, m_Position.y - m_CollChar.getSize().y/2 - 1.0f), sf::Color::Red)
+        };
+        Core()->Window()->draw(line, 2, sf::Lines);
+
+        sf::Text text;
+        text.setString(CLocale::getString(RESOURCE_STR_DISPARALE_PARA_DESTRUILA));
+        text.setFont(Core()->getDefaultFont());
+        text.setCharacterSize(20.0f);
+        text.setOrigin(0, text.getLocalBounds().height);
+        text.setPosition(sf::Vector2f(m_Position.x - m_CollChar.getSize().x/2, m_Position.y - m_CollChar.getSize().y/2 - 5.0f));
+        text.setColor(sf::Color::Cyan);
+        Core()->Window()->draw(text);
+    }
+}

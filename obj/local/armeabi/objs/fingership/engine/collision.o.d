@@ -1,171 +1,171 @@
 obj/local/armeabi/objs/fingership/engine/collision.o: \
  jni/engine/collision.cpp jni/engine/collision.h jni/engine/map.h \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Config.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Clock.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Export.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Time.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Err.hpp \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/ostream \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__config \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/ios \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/iosfwd \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/wchar.h \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/stdio.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/stdio.h \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/xlocale.h \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/wctype.h \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__locale \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/string \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstring \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/string.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/string.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/malloc.h \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstdio \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cwchar \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cwctype \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cctype \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/ctype.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/ctype.h \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/algorithm \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/initializer_list \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstddef \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/type_traits \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/utility \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__tuple \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/memory \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/typeinfo \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/exception \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstdint \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/new \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/limits \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/iterator \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__functional_base \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/tuple \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/atomic \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/stdexcept \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/mutex \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__mutex_base \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/chrono \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/ctime \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/time.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/time.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/sys/time.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/linux/time.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm/siginfo.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm-generic/siginfo.h \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/ratio \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/climits \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/system_error \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cerrno \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/errno.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/errno.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/linux/errno.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm/errno.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm-generic/errno.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm-generic/errno-base.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/pthread.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/signal.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm/signal.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm-generic/signal.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm/sigcontext.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/sys/ucontext.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/sys/user.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/sched.h \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/functional \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/locale.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/locale.h \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/streambuf \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/locale \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstdarg \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstdlib \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/stdlib.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/stdlib.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/alloca.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/strings.h \
- G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/memory.h \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/nl_types.h \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/bitset \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/InputStream.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Lock.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/NonCopyable.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Mutex.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Sleep.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/String.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Utf.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Utf.inl \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/String.inl \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Thread.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Thread.inl \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/ThreadLocal.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/ThreadLocalPtr.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/ThreadLocalPtr.inl \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Vector2.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Vector2.inl \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Vector3.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Vector3.inl \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Context.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Export.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/GlResource.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/ContextSettings.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Event.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Joystick.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Keyboard.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Mouse.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Sensor.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Touch.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/VideoMode.hpp \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/vector \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__split_buffer \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Window.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/WindowHandle.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/WindowStyle.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/BlendMode.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Export.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Color.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Font.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Glyph.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Rect.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Rect.inl \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Texture.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Image.hpp \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/map \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__tree \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/RenderStates.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Transform.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/RenderTexture.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/RenderTarget.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/View.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/PrimitiveType.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Vertex.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/RenderWindow.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Shader.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Shape.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Drawable.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Transformable.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/VertexArray.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/CircleShape.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/RectangleShape.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/ConvexShape.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Sprite.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Text.hpp \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/list \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Config.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Clock.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Export.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Time.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Err.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/ostream \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__config \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/ios \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/iosfwd \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/wchar.h \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/stdio.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/stdio.h \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/xlocale.h \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/wctype.h \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__locale \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/string \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstring \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/string.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/string.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/malloc.h \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstdio \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cwchar \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cwctype \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cctype \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/ctype.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/ctype.h \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/algorithm \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/initializer_list \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstddef \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/type_traits \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/utility \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__tuple \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/memory \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/typeinfo \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/exception \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstdint \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/new \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/limits \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/iterator \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__functional_base \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/tuple \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/atomic \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/stdexcept \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/mutex \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__mutex_base \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/chrono \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/ctime \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/time.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/time.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/sys/time.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/linux/time.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm/siginfo.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm-generic/siginfo.h \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/ratio \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/climits \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/system_error \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cerrno \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/errno.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/errno.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/linux/errno.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm/errno.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm-generic/errno.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm-generic/errno-base.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/pthread.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/signal.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm/signal.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm-generic/signal.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm/sigcontext.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/sys/ucontext.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/sys/user.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/sched.h \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/functional \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/locale.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/locale.h \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/streambuf \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/locale \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstdarg \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstdlib \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/stdlib.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/stdlib.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/alloca.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/strings.h \
+ /home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/memory.h \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/nl_types.h \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/bitset \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/InputStream.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Lock.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/NonCopyable.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Mutex.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Sleep.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/String.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Utf.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Utf.inl \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/String.inl \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Thread.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Thread.inl \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/ThreadLocal.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/ThreadLocalPtr.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/ThreadLocalPtr.inl \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Vector2.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Vector2.inl \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Vector3.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Vector3.inl \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Context.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Export.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/GlResource.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/ContextSettings.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Event.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Joystick.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Keyboard.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Mouse.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Sensor.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Touch.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/VideoMode.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/vector \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__split_buffer \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Window.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/WindowHandle.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/WindowStyle.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/BlendMode.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Export.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Color.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Font.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Glyph.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Rect.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Rect.inl \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Texture.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Image.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/map \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__tree \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/RenderStates.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Transform.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/RenderTexture.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/RenderTarget.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/View.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/PrimitiveType.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Vertex.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/RenderWindow.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Shader.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Shape.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Drawable.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Transformable.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/VertexArray.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/CircleShape.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/RectangleShape.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/ConvexShape.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Sprite.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Text.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/list \
  jni/engine/game_core.h jni/engine/particle.h jni/engine/player.h \
  jni/engine/../entities/character.h jni/engine/../entities/entity.h \
  jni/engine/texture_manager.h jni/engine/sound_manager.h \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/Listener.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/Export.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/Music.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/SoundStream.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/SoundSource.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/Sound.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/SoundBuffer.hpp \
- C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/set \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/SoundBufferRecorder.hpp \
- C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/SoundRecorder.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/Listener.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/Export.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/Music.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/SoundStream.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/SoundSource.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/Sound.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/SoundBuffer.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/set \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/SoundBufferRecorder.hpp \
+ /home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/SoundRecorder.hpp \
  jni/engine/../entities/entity.h jni/engine/../screens/screen.h \
  jni/engine/../screens/../engine/game_core.h \
  jni/engine/../screens/../entities/entity.h jni/engine/basic_functions.h
@@ -174,309 +174,309 @@ jni/engine/collision.h:
 
 jni/engine/map.h:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Config.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Config.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Clock.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Clock.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Export.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Export.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Time.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Time.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Err.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Err.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/ostream:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/ostream:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__config:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__config:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/ios:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/ios:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/iosfwd:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/iosfwd:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/wchar.h:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/wchar.h:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/stdio.h:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/stdio.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/stdio.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/stdio.h:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/xlocale.h:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/xlocale.h:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/wctype.h:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/wctype.h:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__locale:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__locale:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/string:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/string:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstring:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstring:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/string.h:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/string.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/string.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/string.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/malloc.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/malloc.h:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstdio:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstdio:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cwchar:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cwchar:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cwctype:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cwctype:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cctype:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cctype:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/ctype.h:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/ctype.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/ctype.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/ctype.h:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/algorithm:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/algorithm:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/initializer_list:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/initializer_list:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstddef:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstddef:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/type_traits:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/type_traits:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/utility:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/utility:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__tuple:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__tuple:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/memory:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/memory:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/typeinfo:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/typeinfo:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/exception:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/exception:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstdint:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstdint:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/new:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/new:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/limits:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/limits:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/iterator:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/iterator:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__functional_base:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__functional_base:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/tuple:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/tuple:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/atomic:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/atomic:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/stdexcept:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/stdexcept:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/mutex:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/mutex:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__mutex_base:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__mutex_base:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/chrono:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/chrono:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/ctime:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/ctime:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/time.h:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/time.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/time.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/time.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/sys/time.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/sys/time.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/linux/time.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/linux/time.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm/siginfo.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm/siginfo.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm-generic/siginfo.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm-generic/siginfo.h:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/ratio:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/ratio:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/climits:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/climits:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/system_error:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/system_error:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cerrno:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cerrno:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/errno.h:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/errno.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/errno.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/errno.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/linux/errno.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/linux/errno.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm/errno.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm/errno.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm-generic/errno.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm-generic/errno.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm-generic/errno-base.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm-generic/errno-base.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/pthread.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/pthread.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/signal.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/signal.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm/signal.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm/signal.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm-generic/signal.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm-generic/signal.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/asm/sigcontext.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/asm/sigcontext.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/sys/ucontext.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/sys/ucontext.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/sys/user.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/sys/user.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/sched.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/sched.h:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/functional:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/functional:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/locale.h:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/locale.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/locale.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/locale.h:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/streambuf:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/streambuf:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/locale:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/locale:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstdarg:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstdarg:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/cstdlib:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/cstdlib:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/stdlib.h:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/stdlib.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/stdlib.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/stdlib.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/alloca.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/alloca.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/strings.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/strings.h:
 
-G:/Programacion/Java/android-ndk-r10c/platforms/android-9/arch-arm/usr/include/memory.h:
+/home/uchar/Android/android-ndk-r10d/platforms/android-9/arch-arm/usr/include/memory.h:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/../../android/support/include/nl_types.h:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/../../android/support/include/nl_types.h:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/bitset:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/bitset:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/InputStream.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/InputStream.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Lock.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Lock.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/NonCopyable.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/NonCopyable.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Mutex.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Mutex.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Sleep.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Sleep.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/String.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/String.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Utf.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Utf.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Utf.inl:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Utf.inl:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/String.inl:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/String.inl:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Thread.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Thread.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Thread.inl:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Thread.inl:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/ThreadLocal.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/ThreadLocal.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/ThreadLocalPtr.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/ThreadLocalPtr.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/ThreadLocalPtr.inl:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/ThreadLocalPtr.inl:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Vector2.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Vector2.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Vector2.inl:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Vector2.inl:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Vector3.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Vector3.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/System/Vector3.inl:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/System/Vector3.inl:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Context.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Context.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Export.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Export.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/GlResource.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/GlResource.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/ContextSettings.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/ContextSettings.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Event.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Event.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Joystick.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Joystick.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Keyboard.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Keyboard.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Mouse.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Mouse.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Sensor.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Sensor.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Touch.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Touch.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/VideoMode.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/VideoMode.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/vector:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/vector:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__split_buffer:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__split_buffer:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/Window.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/Window.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/WindowHandle.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/WindowHandle.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Window/WindowStyle.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Window/WindowStyle.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/BlendMode.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/BlendMode.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Export.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Export.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Color.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Color.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Font.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Font.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Glyph.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Glyph.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Rect.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Rect.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Rect.inl:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Rect.inl:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Texture.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Texture.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Image.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Image.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/map:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/map:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/__tree:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/__tree:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/RenderStates.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/RenderStates.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Transform.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Transform.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/RenderTexture.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/RenderTexture.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/RenderTarget.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/RenderTarget.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/View.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/View.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/PrimitiveType.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/PrimitiveType.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Vertex.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Vertex.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/RenderWindow.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/RenderWindow.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Shader.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Shader.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Shape.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Shape.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Drawable.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Drawable.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Transformable.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Transformable.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/VertexArray.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/VertexArray.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/CircleShape.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/CircleShape.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/RectangleShape.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/RectangleShape.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/ConvexShape.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/ConvexShape.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Sprite.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Sprite.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Graphics/Text.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Graphics/Text.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/list:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/list:
 
 jni/engine/game_core.h:
 
@@ -492,27 +492,27 @@ jni/engine/texture_manager.h:
 
 jni/engine/sound_manager.h:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/Listener.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/Listener.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/Export.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/Export.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/Music.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/Music.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/SoundStream.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/SoundStream.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/SoundSource.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/SoundSource.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/Sound.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/Sound.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/SoundBuffer.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/SoundBuffer.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/cxx-stl/llvm-libc++/libcxx/include/set:
+/home/uchar/Android/android-ndk-r10d/sources/cxx-stl/llvm-libc++/libcxx/include/set:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/SoundBufferRecorder.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/SoundBufferRecorder.hpp:
 
-C:\Programacion\android-ndk-r10\sources\/sfml/include/SFML/Audio/SoundRecorder.hpp:
+/home/uchar/Android/android-ndk-r10d/sources/sfml/include/SFML/Audio/SoundRecorder.hpp:
 
 jni/engine/../entities/entity.h:
 

@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "turret.h"
@@ -9,17 +9,12 @@
 #include <cmath>
 
 CTurret::CTurret(sf::Vector2f pos)
-: CEntity(CEntity::TURRET)
+: CEntity(CEntity::TURRET, pos, TILE_SIZE, TILE_SIZE, CTextureManager::TEXTURE_TURRET)
 {
 	m_Alive = true;
 	m_OrgPos = m_Position = pos;
 	m_Shoot = false;
 	m_ShootTime = 0L;
-
-	sf::Vector2f size(TILE_SIZE, TILE_SIZE);
-	m_CollChar = sf::RectangleShape(sf::Vector2f(size.x, size.y));
-	m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
-	m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_TURRET));
 }
 CTurret::~CTurret()
 { }
@@ -48,7 +43,7 @@ void CTurret::tick()
 		if (sf::Touch::isDown(0))
 		{
 			sf::Vector2f convCoords = Core()->Window()->mapPixelToCoords(sf::Touch::getPosition(0));
-			if (Core()->Player()->m_pCharacter && m_CollChar.getGlobalBounds().contains(convCoords))
+			if (Core()->Player()->m_pCharacter && m_Quad.getGlobalBounds().contains(convCoords))
 			{
 				CEffects::createPoints(m_Position, 250);
 				Core()->Player()->addPoints(250);
@@ -56,7 +51,7 @@ void CTurret::tick()
 				Core()->SoundManager()->play(CSoundManager::SOUND_EXPLOSION);
 				Core()->SoundManager()->play(CSoundManager::SOUND_DESTROY);
 				m_Alive = false;
-				m_CollChar.setFillColor(sf::Color(45, 45, 45, 255));
+				m_Quad.setFillColor(sf::Color(45, 45, 45, 255));
 
 				Core()->m_TurretKilled = true;
 			}
@@ -68,7 +63,7 @@ void CTurret::tick()
 			sf::Vector2f dir = sf::Vector2f(rawDir.x, rawDir.y);
 			dir = vector_normalize(dir);
 
-			m_CollChar.setRotation(-vector_angle(dir));
+			m_Quad.setRotation(-vector_angle(dir));
 
 			if (m_ShootTime > 65L)
 			{
@@ -90,8 +85,8 @@ void CTurret::tick()
 		}
 	}
 
-	m_CollChar.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
-	Core()->Window()->draw(m_CollChar);
+	m_Quad.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
+	Core()->Window()->draw(m_Quad);
 
     if (!Core()->m_TurretKilled)
     {

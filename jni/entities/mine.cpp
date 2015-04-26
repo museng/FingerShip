@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "mine.h"
@@ -9,16 +9,11 @@
 #include <cmath>
 
 CMine::CMine(sf::Vector2f pos)
-: CEntity(CEntity::MINE)
+: CEntity(CEntity::MINE, pos, TILE_SIZE, TILE_SIZE, CTextureManager::TEXTURE_MINE)
 {
 	m_Position = pos;
 	m_OrgPos = m_Position;
 	m_MoveTimer = 0L;
-
-	sf::Vector2f size(TILE_SIZE, TILE_SIZE);
-	m_CollChar = sf::RectangleShape(sf::Vector2f(size.x, size.y));
-	m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
-	m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_MINE));
 
 	m_Offset = random_float(-3.0f, 3.0f);
 	if (m_Offset > -1.0f && m_Offset < 1.0f) m_Offset = 1.0f;
@@ -45,7 +40,7 @@ void CMine::tick()
 	}
 
 	m_Position = sf::Vector2f(m_OrgPos.x + sinf(m_MoveTimer*0.05f)*TILE_SIZE, m_Position.y);
-	m_CollChar.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
+	m_Quad.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
 
 	if (m_Position.x < 0 || m_Position.x > RSIZE_W)
 	{
@@ -80,7 +75,7 @@ void CMine::tick()
 		Core()->Window()->draw(spriteInd);
 	}
 
-	Core()->Window()->draw(m_CollChar);
+	Core()->Window()->draw(m_Quad);
 
     if (!Core()->m_MineKilled)
     {

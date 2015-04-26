@@ -1,10 +1,19 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "entity.h"
 #include "../engine/game_core.h"
 
-CEntity::CEntity(int type)
+CEntity::CEntity(int type, sf::Vector2f pos, int textureId)
+: m_Quad(pos, textureId)
+{
+	m_pCore = CGameCore::getInstance();
+
+	m_Type = type;
+	m_ToDelete = false;
+}
+CEntity::CEntity(int type, sf::Vector2f pos, float width, float height, int textureId)
+: m_Quad(pos, width, height, textureId)
 {
 	m_pCore = CGameCore::getInstance();
 

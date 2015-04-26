@@ -36,7 +36,7 @@ inline int vector_length(const sf::Vector2f& v)
 	return sqrt(v.x*v.x + v.y*v.y);
 }
 
-inline void vector_rotate(sf::Vector2f &Center, sf::Vector2f *pPoint, float RotationRadians)
+inline void vector_rotate(const sf::Vector2f &Center, sf::Vector2f *pPoint, float RotationRadians)
 {
 	int x = pPoint->x - Center.x;
 	int y = pPoint->y - Center.y;
@@ -44,7 +44,7 @@ inline void vector_rotate(sf::Vector2f &Center, sf::Vector2f *pPoint, float Rota
 	pPoint->y = (int)(x * sinf(RotationRadians) + y * cosf(RotationRadians) + Center.y);
 }
 
-inline float vector_dot(sf::Vector2f &vectorA, sf::Vector2f &vectorB)
+inline float vector_dot(const sf::Vector2f &vectorA, const sf::Vector2f &vectorB)
 {
 	return vectorA.x*vectorB.x + vectorA.y*vectorB.y;
 }

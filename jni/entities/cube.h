@@ -5,7 +5,6 @@
 #define H_CUBE
 #include "entity.h"
 #include <SFML/Graphics.hpp>
-#include "../engine/quad.h"
 
 class CCube : public CEntity
 {
@@ -24,7 +23,6 @@ public:
 private:
 	float m_RotDir;
 	sf::Vector2f m_Dir;
-	Quad m_Quad;
 };
 
 #endif

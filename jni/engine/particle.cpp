@@ -37,6 +37,7 @@ void CParticle::tick()
 		sf::Vector2f lastPos = m_Pos;
 		m_Pos += m_Dir*m_Vel-m_Force*(float)m_Timer*0.05f;
 
+		// TODO: Fix stuck state...
 		if (m_Collide)
 		{
 			sf::Vector2f rPos;
@@ -44,6 +45,9 @@ void CParticle::tick()
 			{
 				if (rPos.x != m_Pos.x) m_Dir.x *= -1.0f;
 				if (rPos.y != m_Pos.y) m_Dir.y *= -1.0f;
+
+				if (lastPos == rPos) // Stuck!
+					m_Vel = 0.0f;
 
 				rPos.y -= (int)pCore->Collision()->Map()->m_OffsetY%TILE_SIZE;
 				m_Pos = rPos;

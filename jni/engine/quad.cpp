@@ -6,51 +6,61 @@
 #include "basic_functions.h"
 #include <SFML/Graphics/Vertex.hpp>
 
+const int Quad::NUM_VERTEX = 6; // Two Triangles
+
 Quad::Quad(sf::Vector2f pos, float width, float height, int textId)
 : Drawable(),
-  m_pvPoints(sf::Triangles, 6)
+  m_vPoints(sf::Triangles, NUM_VERTEX)
 {
 	m_OutLine = false;
 	m_OutLineColor = sf::Color::Red;
-	m_TextureId = textId;
 	m_Position = pos;
 	m_RotationDegrees = 0.0f;
 
-	CGameCore *pCore = CGameCore::getInstance();
-	sf::Texture *pTexture = pCore->TextureManager()->get(m_TextureId);
-	if (pTexture)
-	{
-		m_pvPoints[0].texCoords = sf::Vector2f(0.0f, 0.0f);
-		m_pvPoints[1].texCoords = sf::Vector2f(pTexture->getSize().x, pTexture->getSize().y);
-		m_pvPoints[2].texCoords = sf::Vector2f(pTexture->getSize().x, 0.0f);
-		m_pvPoints[3].texCoords = sf::Vector2f(0.0f, 0.0f);
-		m_pvPoints[4].texCoords = sf::Vector2f(0.0f, pTexture->getSize().y);
-		m_pvPoints[5].texCoords = sf::Vector2f(pTexture->getSize().x, pTexture->getSize().y);
-	}
-
+	setTextureId(textId);
 	setSize(width, height);
 
-	for (int i=0; i<6; i++)
-		m_pvPoints[i].color = sf::Color::White;
+	for (int i=0; i<NUM_VERTEX; i++)
+		m_vPoints[i].color = sf::Color::White;
+}
+Quad::Quad(sf::Vector2f pos, int textId)
+: Drawable(),
+  m_vPoints(sf::Triangles, NUM_VERTEX)
+{
+	m_OutLine = false;
+	m_OutLineColor = sf::Color::Red;
+	m_Position = pos;
+	m_RotationDegrees = 0.0f;
+
+	setTextureId(textId);
+
+	for (int i=0; i<NUM_VERTEX; i++)
+		m_vPoints[i].color = sf::Color::White;
 }
 
 void Quad::setPosition(sf::Vector2f pos)
 {
 	m_Position = pos;
+	setRotation(m_RotationDegrees);
+}
 
-	m_pvPoints[0].position = sf::Vector2f(m_Position.x - m_LocalBounds.width/2, m_Position.y - m_LocalBounds.height/2);
-	m_pvPoints[1].position = sf::Vector2f(m_Position.x+m_LocalBounds.width/2, m_Position.y+m_LocalBounds.height/2);
-	m_pvPoints[2].position = sf::Vector2f(m_Position.x+m_LocalBounds.width/2, m_Position.y - m_LocalBounds.height/2);
-	m_pvPoints[3].position = sf::Vector2f(m_Position.x - m_LocalBounds.width/2, m_Position.y - m_LocalBounds.height/2);
-	m_pvPoints[4].position = sf::Vector2f(m_Position.x - m_LocalBounds.width/2, m_Position.y+m_LocalBounds.height/2);
-	m_pvPoints[5].position = sf::Vector2f(m_Position.x+m_LocalBounds.width/2, m_Position.y+m_LocalBounds.height/2);
+void Quad::setRotation(float degrees)
+{
+	m_RotationDegrees = degrees;
 
-	vector_rotate(m_Position, &m_pvPoints[0].position, angle_to_radians(m_RotationDegrees));
-	vector_rotate(m_Position, &m_pvPoints[1].position, angle_to_radians(m_RotationDegrees));
-	vector_rotate(m_Position, &m_pvPoints[2].position, angle_to_radians(m_RotationDegrees));
-	vector_rotate(m_Position, &m_pvPoints[3].position, angle_to_radians(m_RotationDegrees));
-	vector_rotate(m_Position, &m_pvPoints[4].position, angle_to_radians(m_RotationDegrees));
-	vector_rotate(m_Position, &m_pvPoints[5].position, angle_to_radians(m_RotationDegrees));
+	m_vPoints[0].position = sf::Vector2f(m_Position.x - m_LocalBounds.width/2, m_Position.y - m_LocalBounds.height/2);
+	m_vPoints[1].position = sf::Vector2f(m_Position.x+m_LocalBounds.width/2, m_Position.y+m_LocalBounds.height/2);
+	m_vPoints[2].position = sf::Vector2f(m_Position.x+m_LocalBounds.width/2, m_Position.y - m_LocalBounds.height/2);
+	m_vPoints[3].position = sf::Vector2f(m_Position.x - m_LocalBounds.width/2, m_Position.y - m_LocalBounds.height/2);
+	m_vPoints[4].position = sf::Vector2f(m_Position.x - m_LocalBounds.width/2, m_Position.y+m_LocalBounds.height/2);
+	m_vPoints[5].position = sf::Vector2f(m_Position.x+m_LocalBounds.width/2, m_Position.y+m_LocalBounds.height/2);
+
+	vector_rotate(m_Position, &m_vPoints[0].position, angle_to_radians(m_RotationDegrees));
+	vector_rotate(m_Position, &m_vPoints[1].position, angle_to_radians(m_RotationDegrees));
+	vector_rotate(m_Position, &m_vPoints[2].position, angle_to_radians(m_RotationDegrees));
+	vector_rotate(m_Position, &m_vPoints[3].position, angle_to_radians(m_RotationDegrees));
+	vector_rotate(m_Position, &m_vPoints[4].position, angle_to_radians(m_RotationDegrees));
+	vector_rotate(m_Position, &m_vPoints[5].position, angle_to_radians(m_RotationDegrees));
 }
 
 void Quad::setSize(float width, float height)
@@ -59,53 +69,58 @@ void Quad::setSize(float width, float height)
 	setPosition(m_Position);
 }
 
-void Quad::setPoint(unsigned int index, Vector2f point)
+void Quad::setFillColor(sf::Color color)
 {
-	if (index > 3)
-		return;
-
-	m_pvPoints[index] = point;
-}
-sf::Vector2f Quad::getPoint(unsigned int index)
-{
-	if (index > 3)
-		return sf::Vector2f(0.0f,0.0f);
-
-	return m_pvPoints[index].position;
-}
-void Quad::setPointColor(unsigned int index, Color _color)
-{
-	if (index > 3)
-		return;
-
-	m_pvPoints[index].color = _color;
-}
-sf::Color Quad::getPointColor(unsigned int index)
-{
-	if (index > 3)
-		return Color::White;
-
-	return m_pvPoints[index].color;
+	for (int i=0; i<NUM_VERTEX; m_vPoints[i++].color = color);
 }
 
+void Quad::setTextureId(int textId)
+{
+	m_TextureId = textId;
+
+	CGameCore *pCore = CGameCore::getInstance();
+	sf::Texture *pTexture = pCore->TextureManager()->get(m_TextureId);
+	if (pTexture)
+		setTextureRect(sf::IntRect(0, 0, (int)pTexture->getSize().x, (int)pTexture->getSize().y));
+	else
+		setTextureRect(sf::IntRect(0, 0, 1, 1));
+}
+
+void Quad::setTextureRect(const sf::IntRect &textureRect)
+{
+	m_TextureRect = textureRect;
+
+	m_vPoints[0].texCoords = sf::Vector2f(m_TextureRect.left, m_TextureRect.top);
+	m_vPoints[1].texCoords = sf::Vector2f(m_TextureRect.width, m_TextureRect.height);
+	m_vPoints[2].texCoords = sf::Vector2f(m_TextureRect.width, m_TextureRect.top);
+	m_vPoints[3].texCoords = sf::Vector2f(m_TextureRect.left, m_TextureRect.top);
+	m_vPoints[4].texCoords = sf::Vector2f(m_TextureRect.left, m_TextureRect.height);
+	m_vPoints[5].texCoords = sf::Vector2f(m_TextureRect.width, m_TextureRect.height);
+}
 
 void Quad::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	CGameCore *pCore = CGameCore::getInstance();
 
-	target.draw(m_pvPoints, pCore->TextureManager()->get(m_TextureId));
+	states.texture = pCore->TextureManager()->get(m_TextureId);
+	target.draw(m_vPoints, states);
 
 	//Draw OutLine
 	if (m_OutLine)
 	{
-		sf::VertexArray lines;
-		for (size_t i=0; i<3; i++)
-		{
-			lines.append(sf::Vertex(m_pvPoints[i].position, m_OutLineColor));
-			lines.append(sf::Vertex(m_pvPoints[i+1].position, m_OutLineColor));
-		}
-		lines.append(sf::Vertex(m_pvPoints[0].position, m_OutLineColor));
-		lines.append(sf::Vertex(m_pvPoints[3].position, m_OutLineColor));
+		sf::VertexArray lines(sf::Lines, 8);
+
+		lines[0] = sf::Vertex(m_vPoints[1].position, m_OutLineColor);
+		lines[1] = sf::Vertex(m_vPoints[2].position, m_OutLineColor);
+
+		lines[2] = sf::Vertex(m_vPoints[2].position, m_OutLineColor);
+		lines[3] = sf::Vertex(m_vPoints[0].position, m_OutLineColor);
+
+		lines[4] = sf::Vertex(m_vPoints[0].position, m_OutLineColor);
+		lines[5] = sf::Vertex(m_vPoints[4].position, m_OutLineColor);
+
+		lines[6] = sf::Vertex(m_vPoints[4].position, m_OutLineColor);
+		lines[7] = sf::Vertex(m_vPoints[1].position, m_OutLineColor);
 
 		target.draw(lines);
 	}

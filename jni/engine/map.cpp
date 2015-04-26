@@ -165,7 +165,7 @@ void CMap::genMapZone()
 								if (randMines == 3 && m_pCore->getScreen()->getEntitiesByType(CEntity::MINE).size() < 4)
 									m_pCore->getScreen()->addEntity(new CMine(sf::Vector2f((e+o)*TILE_SIZE + TILE_SIZE/2, i*TILE_SIZE - RTILES_MARGIN + TILE_SIZE/2)));
 
-								// Enemies (SPACEMAN)
+								// Powerup (SPACEMAN)
 								if (randSpaceman == 15 && m_pCore->getScreen()->getEntities()->size() >= 3 && m_pCore->getScreen()->getEntitiesByType(CEntity::SPACEMAN).size() == 0)
 									m_pCore->getScreen()->addEntity(new CSpaceman(sf::Vector2f((e+o)*TILE_SIZE + TILE_SIZE/2, i*TILE_SIZE - RTILES_MARGIN + TILE_SIZE/2)));
 
@@ -257,7 +257,7 @@ void CMap::genMapZone()
 						{
 							CCube *pCube = new CCube(sf::Vector2f(e*TILE_SIZE + TILE_SIZE/2, i*TILE_SIZE - RTILES_MARGIN + TILE_SIZE/2));
 
-							if (!m_pCore->Collision()->isInEntity(pCube->getCollChar().getGlobalBounds(), CEntity::CUBE))
+							if (!m_pCore->Collision()->isInEntity(pCube->getQuad().getPoints(), CEntity::CUBE))
 								m_pCore->getScreen()->addEntity(pCube);
 							else
 								delete pCube;

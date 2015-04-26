@@ -146,7 +146,7 @@ void CScreenGame::tick()
 		// Check Player Status
 		if (Core()->Player()->m_pCharacter)
 		{
-			CEntity *pEntColl = Core()->Collision()->isInEntity(Core()->Player()->m_pCharacter->getCollChar().getGlobalBounds());
+			CEntity *pEntColl = Core()->Collision()->isInEntity(Core()->Player()->m_pCharacter->getQuad().getPoints());
 			CTile *pTile = Core()->Collision()->intersectLineTileSolid(Core()->Player()->m_pCharacter->getPrevPosition(), Core()->Player()->m_pCharacter->getPosition());
 			if (pTile || pEntColl)
 			{

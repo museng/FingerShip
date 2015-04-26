@@ -9,7 +9,7 @@
 #include "boss_spacestation.h"
 
 CProjectile::CProjectile(int owner, sf::Vector2f pos, sf::Color color, sf::Vector2f dir, float vel, int mode)
-: CEntity(CEntity::PROJECTILE)
+: CEntity(CEntity::PROJECTILE, pos, -1)
 {
 	m_Owner = owner;
 	m_PrevPos = m_Position = pos;
@@ -20,29 +20,21 @@ CProjectile::CProjectile(int owner, sf::Vector2f pos, sf::Color color, sf::Vecto
 
 	if (m_Owner == CEntity::TURRET)
 	{
-		sf::Vector2f size(9, 9);
-		m_CollChar = sf::RectangleShape(sf::Vector2f(size.x, size.y));
-		m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
-		m_CollChar.setRotation(-vector_angle(dir));
-
-		m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_BULLET_TURRET));
+		m_Quad.setSize(9, 9);
+		m_Quad.setRotation(-vector_angle(dir));
+		m_Quad.setTextureId(CTextureManager::TEXTURE_BULLET_TURRET);
 	}
 	else if (m_Owner == CEntity::SPACESTATION)
 	{
-		sf::Vector2f size(9, 9);
-		m_CollChar = sf::RectangleShape(sf::Vector2f(size.x, size.y));
-		m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
-		m_CollChar.setRotation(-vector_angle(dir));
-
-		m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_BULLET_SPACESTATION));
+		m_Quad.setSize(9, 9);
+		m_Quad.setRotation(-vector_angle(dir));
+		m_Quad.setTextureId(CTextureManager::TEXTURE_BULLET_SPACESTATION);
 	}
 	else
 	{
-		sf::Vector2f size(22, 22);
-		m_CollChar = sf::RectangleShape(sf::Vector2f(size.x, size.y));
-		m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
-
-		m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_BULLET));
+		m_Quad.setSize(22, 22);
+		m_Quad.setRotation(-vector_angle(dir));
+		m_Quad.setTextureId(CTextureManager::TEXTURE_BULLET);
 	}
 }
 CProjectile::~CProjectile()
@@ -70,13 +62,13 @@ void CProjectile::tick()
 		m_Position.x += m_Dir.x*m_Vel;
 		m_Position.y += m_Dir.y*m_Vel;
 	}
-	m_CollChar.setPosition(m_Position.x, m_Position.y);
+	m_Quad.setPosition(m_Position);
 
 	if (m_Owner == CEntity::CHARACTER)
 	{
 		//m_CollChar.setFillColor(m_Color);
 
-		CEntity *pEntColl = Core()->Collision()->isInEntity(m_CollChar.getGlobalBounds());
+		CEntity *pEntColl = Core()->Collision()->isInEntity(m_Quad.getPoints());
 		sf::Vector2f rPos;
 		CTile *pTile = Core()->Collision()->intersectLineTileSolid(m_PrevPos, m_Position, &rPos);
 
@@ -129,9 +121,9 @@ void CProjectile::tick()
 
 			if (pEntColl->getType() == CEntity::METEOR)
 			{
-				sf::Vector2f tmpPos = sf::Vector2f(pEntColl->getPosition().x+pEntColl->getCollChar().getSize().x/2, pEntColl->getPosition().y+pEntColl->getCollChar().getSize().y/2);
-				Core()->getScreen()->addEntity(new CMeteor(tmpPos, sf::Vector2f(0.25f, 1.0f), pEntColl->getCollChar().getSize().x));
-				Core()->getScreen()->addEntity(new CMeteor(tmpPos, sf::Vector2f(-0.25f, 1.0f), pEntColl->getCollChar().getSize().x));
+				sf::Vector2f tmpPos = sf::Vector2f(pEntColl->getPosition().x+pEntColl->getQuad().getLocalBounds().width/2, pEntColl->getPosition().y+pEntColl->getQuad().getLocalBounds().height/2);
+				Core()->getScreen()->addEntity(new CMeteor(tmpPos, sf::Vector2f(0.25f, 1.0f), pEntColl->getQuad().getLocalBounds().width));
+				Core()->getScreen()->addEntity(new CMeteor(tmpPos, sf::Vector2f(-0.25f, 1.0f), pEntColl->getQuad().getLocalBounds().width));
 			}
 			else if (pEntColl->getType() == CEntity::CUBE)
 			{
@@ -160,7 +152,7 @@ void CProjectile::tick()
 			CEffects::createCharacterProjectileTrail(m_Position);
 	} else if (m_Owner == CEntity::TURRET)
 	{
-		if (Core()->Player()->m_pCharacter && Core()->Player()->m_pCharacter->getCollChar().getGlobalBounds().contains(sf::Vector2f(m_Position.x, m_Position.y)))
+		if (Core()->Player()->m_pCharacter && Core()->Player()->m_pCharacter->getQuad().getGlobalBounds().contains(sf::Vector2f(m_Position.x, m_Position.y)))
 		{
 			if (!Core()->Player()->m_pCharacter->hasShield())
 				Core()->Player()->destroyCharacter(true);
@@ -173,7 +165,7 @@ void CProjectile::tick()
 			CEffects::createTurretProjectileTrail(m_Position);
 	} else if (m_Owner == CEntity::SPACESTATION)
 	{
-		if (Core()->Player()->m_pCharacter && Core()->Player()->m_pCharacter->getCollChar().getGlobalBounds().contains(sf::Vector2f(m_Position.x, m_Position.y)))
+		if (Core()->Player()->m_pCharacter && Core()->Player()->m_pCharacter->getQuad().getGlobalBounds().contains(sf::Vector2f(m_Position.x, m_Position.y)))
 		{
 			if (!Core()->Player()->m_pCharacter->hasShield())
 				Core()->Player()->destroyCharacter(true);
@@ -184,6 +176,6 @@ void CProjectile::tick()
 		}
 	}
 
-	Core()->Window()->draw(m_CollChar, sf::BlendAdd);
+	Core()->Window()->draw(m_Quad, sf::BlendAdd);
 	m_PrevPos = m_Position;
 }

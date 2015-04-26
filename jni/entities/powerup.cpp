@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "powerup.h"
@@ -7,24 +7,20 @@
 #include <cmath>
 
 CPowerup::CPowerup(sf::Vector2f pos, int type)
-: CEntity(CEntity::POWERUP)
+: CEntity(CEntity::POWERUP, pos, TILE_SIZE/2, TILE_SIZE/2, -1)
 {
 	m_Position = pos;
 	m_Type = type;
 	m_MoveTimer = 0L;
 
-	sf::Vector2f size(TILE_SIZE/2, TILE_SIZE/2);
-	m_CollChar = sf::RectangleShape(size);
-	m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
-
 	if (m_Type == SHIELD)
-		m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_POWERUP_SHIELD));
+		m_Quad.setTextureId(CTextureManager::TEXTURE_POWERUP_SHIELD);
 	else if (m_Type == BOLT)
-		m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_POWERUP_BOLT));
+		m_Quad.setTextureId(CTextureManager::TEXTURE_POWERUP_BOLT);
 	else if (m_Type == STAR)
-		m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_POWERUP_STAR));
+		m_Quad.setTextureId(CTextureManager::TEXTURE_POWERUP_STAR);
 	else if (m_Type == BAD_BOLT)
-		m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_POWERUP_BAD_BOLT));
+		m_Quad.setTextureId(CTextureManager::TEXTURE_POWERUP_BAD_BOLT);
 }
 CPowerup::~CPowerup()
 { }
@@ -53,9 +49,9 @@ void CPowerup::tick()
 
 	// Render Character Init
 	sf::Vector2f posPowerup = sf::Vector2f(m_Position.x + sinf(m_MoveTimer*0.05f)*12.0f, m_Position.y + cosf(m_MoveTimer*0.05f)*12.0f);
-	m_CollChar.setPosition(posPowerup);
+	m_Quad.setPosition(posPowerup);
 
-	Core()->Window()->draw(m_CollChar);
+	Core()->Window()->draw(m_Quad);
 
 	if (!Core()->isPaused())
 		m_MoveTimer++;

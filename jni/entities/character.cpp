@@ -8,7 +8,8 @@
 
 int CCharacter::SIZE = 52;
 CCharacter::CCharacter()
-: CEntity(CEntity::CHARACTER)
+: CEntity(CEntity::CHARACTER, sf::Vector2f(.0f,.0f), SIZE*1.5f, SIZE*1.5f, -1),
+  m_VisibleQuad(sf::Vector2f(.0f,.0f), SIZE*2, SIZE*2, CTextureManager::TEXTURE_SHIP)
 {
 	m_CanShoot = true;
 	m_OverHeat = 0.0f;
@@ -16,21 +17,12 @@ CCharacter::CCharacter()
 	m_Shield = false;
 	m_Move = false;
 
-	sf::Vector2f size(SIZE, SIZE);
-	m_VisibleChar = sf::CircleShape(size.x); // Radio
-	m_VisibleChar.setOrigin(sf::Vector2f(size.x, size.y));
-	m_VisibleChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_SHIP));
-
-	m_CollChar = sf::RectangleShape(sf::Vector2f(size.x/1.5f, size.y/1.5f));
-	m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
-
 	int offset = TILE_SIZE*USER_ZONE_LIMIT_DOWN - TILE_SIZE*USER_ZONE_LIMIT_UP;
 	offset = TILE_SIZE*USER_ZONE_LIMIT_UP + offset/2;
-
 	m_PrevPos = m_Position = sf::Vector2f(RSIZE_W/2, offset);
 
-	m_VisibleChar.setPosition(m_Position.x, m_Position.y);
-	m_CollChar.setPosition(m_Position.x, m_Position.y);
+	m_Quad.setPosition(m_Position);
+	m_VisibleQuad.setPosition(m_Position);
 }
 CCharacter::~CCharacter()
 { }
@@ -61,7 +53,7 @@ void CCharacter::tick()
 		if (sf::Touch::isDown(0) && Core()->getScreen()->m_InputActive)
 		{
 			sf::Vector2f convCoords = Core()->Window()->mapPixelToCoords(sf::Touch::getPosition(0));
-			if (m_VisibleChar.getGlobalBounds().contains(convCoords))
+			if (m_VisibleQuad.getGlobalBounds().contains(convCoords))
 			{
 				m_Move = true;
 
@@ -107,8 +99,8 @@ void CCharacter::tick()
 			m_Timer.restart();
 		}
 
-		m_VisibleChar.setPosition(m_Position.x, m_Position.y);
-		m_CollChar.setPosition(m_Position.x, m_Position.y);
+		m_Quad.setPosition(m_Position);
+		m_VisibleQuad.setPosition(m_Position);
 
 		/*int x = m_Position.x/TILE_SIZE;
 		int y = m_Position.y/TILE_SIZE;
@@ -131,7 +123,7 @@ void CCharacter::tick()
 		Core()->Window()->draw(rectShield);
 	}
 
-	Core()->Window()->draw(m_VisibleChar);
+	Core()->Window()->draw(m_VisibleQuad);
 	m_PrevPos = m_Position;
 }
 

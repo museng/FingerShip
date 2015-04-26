@@ -428,7 +428,7 @@ public:
 	{
 		CGameCore *pCore = CGameCore::getInstance();
 
-		int rsize = pCube->getCollChar().getSize().x;
+		int rsize = (int)pCube->getQuad().getLocalBounds().width;
 		CParticle *pParticle = new CParticle(sf::BlendAdd, RENDER_FRONT);
 		pParticle->m_Pos = pCube->getPosition();
 		pParticle->m_SizeInit = sf::Vector2f(rsize, rsize);
@@ -437,7 +437,7 @@ public:
 		pParticle->m_ColorEnd = sf::Color(250, 0, 0, 0);
 		pParticle->m_Duration = 0.95f;
 		pParticle->m_Shape.setTexture(pCore->TextureManager()->get(CTextureManager::TEXTURE_CUBE));
-		pParticle->m_Shape.setRotation(pCube->getCollChar().getRotation());
+		pParticle->m_Shape.setRotation(pCube->getQuad().getRotation());
 		pCore->getScreen()->addParticle(pParticle);
 	}
 
@@ -445,7 +445,7 @@ public:
 	{
 		CGameCore *pCore = CGameCore::getInstance();
 
-		int rsize = pBoss->getCollChar().getSize().x;
+		int rsize = (int)pBoss->getQuad().getLocalBounds().width;
 		CParticle *pParticle = new CParticle(sf::BlendAdd, RENDER_FRONT);
 		pParticle->m_Pos = pBoss->getPosition();
 		pParticle->m_SizeInit = sf::Vector2f(rsize, rsize);
@@ -457,7 +457,7 @@ public:
 		pParticle->m_Dir = sf::Vector2f(random_float(-1.0f, 1.0f), random_float(-1.0f, 1.0f));
 		pParticle->m_Vel = 3.0f;
 		pParticle->m_Shape.setTexture(pCore->TextureManager()->get(CTextureManager::TEXTURE_SPACESTATION));
-		pParticle->m_Shape.setRotation(pBoss->getCollChar().getRotation());
+		pParticle->m_Shape.setRotation(pBoss->getQuad().getRotation());
 		pCore->getScreen()->addParticle(pParticle);
 	}
 

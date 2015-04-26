@@ -18,8 +18,8 @@ public:
 	void init(class CMap *pMap);
 	class CTile* isTileSolid(sf::Vector2f pos);
 	class CTile* intersectLineTileSolid(sf::Vector2f ipos, sf::Vector2f epos, sf::Vector2f *rpos = 0x0);
-	CEntity* isInEntity(sf::FloatRect rectI, int type = -1);
-	bool isQuadIntersecting(Quad &a, Quad &b);
+	CEntity* isInEntity(sf::VertexArray &pointsA, int type = -1);
+	bool isVertexArrayIntersecting(sf::VertexArray &a, sf::VertexArray &b);
 
 	void reset();
 

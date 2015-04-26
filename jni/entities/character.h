@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #ifndef H_CHARACTER
@@ -28,11 +28,13 @@ public:
 	void dropShield();
 	bool hasShield() const { return m_Shield; }
 
+	Quad& getQuad() { return m_Quad; }
+
 private:
-	sf::CircleShape m_VisibleChar;
-	sf::RectangleShape m_CollisionChar;
 	sf::Clock m_Timer;
 	sf::Vector2f m_PrevPos;
+
+	Quad m_VisibleQuad; // TODO: Don't use this! use ArrayVertex for collision detection!
 
 	bool m_Shield;
 	bool m_CanShoot;

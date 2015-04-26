@@ -10,8 +10,7 @@
 #include <cmath>
 
 CCube::CCube(sf::Vector2f pos)
-: CEntity(CEntity::CUBE),
-  m_Quad(pos, 1, 1, CTextureManager::TEXTURE_CUBE)
+: CEntity(CEntity::CUBE, pos, CTextureManager::TEXTURE_CUBE)
 {
 	m_Position = pos;
 	m_Health = 6;
@@ -24,11 +23,6 @@ CCube::CCube(sf::Vector2f pos)
 
 	int rand = random_int(TILE_SIZE, TILE_SIZE*3);
 	sf::Vector2f size(rand, rand);
-	m_CollChar = sf::RectangleShape(size);
-	m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
-	m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_CUBE));
-	m_CollChar.setPosition(m_Position);
-
 	m_Quad.setSize(size.x, size.y);
 
 	m_RotDir = random_float(-0.25, 0.25);
@@ -49,7 +43,7 @@ void CCube::tick()
 {
 	m_Position.y += Core()->getGameSpeed();
 
-	if (m_Position.y > RSIZE_H + m_CollChar.getSize().y || m_Position.x+m_CollChar.getLocalBounds().width/2 < 0 || m_Position.x-m_CollChar.getLocalBounds().width/2 > RSIZE_W)
+	if (m_Position.y > RSIZE_H + m_Quad.getLocalBounds().height || m_Position.x+m_Quad.getLocalBounds().width/2 < 0 || m_Position.x-m_Quad.getLocalBounds().width/2 > RSIZE_W)
 	{
 		setToDelete();
 		return;
@@ -57,14 +51,10 @@ void CCube::tick()
 	if (m_Health <= 0)
 		destroy();
 
-	m_CollChar.setPosition(m_Position);
 	m_Quad.setPosition(m_Position);
 
 	if (!Core()->isPaused())
-	{
-		m_CollChar.setRotation(m_CollChar.getRotation()+m_RotDir);
 		m_Quad.setRotation(m_Quad.getRotation()+m_RotDir);
-	}
 
 	//Core()->Window()->draw(m_CollChar);
 	Core()->Window()->draw(m_Quad);

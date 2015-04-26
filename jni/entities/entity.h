@@ -1,9 +1,10 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #ifndef H_ENTITY
 #define H_ENTITY
 
+#include "../engine/quad.h"
 #include <SFML/Graphics.hpp>
 
 class CEntity
@@ -27,7 +28,8 @@ public:
 		NUM_ENTITIES
 	};
 
-	CEntity(int type);
+	CEntity(int type, sf::Vector2f pos, int textureId);
+	CEntity(int type, sf::Vector2f pos, float width, float height, int textureId);
 	virtual ~CEntity();
 
 	virtual void tick() = 0;
@@ -41,11 +43,11 @@ public:
 	void setToDelete() { m_ToDelete = true; }
 	bool toDelete() const { return m_ToDelete; }
 
-	sf::RectangleShape getCollChar() const { return m_CollChar; }
+	Quad& getQuad() { return m_Quad; }
 
 protected:
 	sf::Vector2f m_Position;
-	sf::RectangleShape m_CollChar;
+	Quad m_Quad;
 
 private:
 	class CGameCore *m_pCore;

@@ -11,7 +11,8 @@
 #include <cmath>
 
 CBossSpaceStation::CBossSpaceStation(sf::Vector2f pos)
-: CEntity(CEntity::SPACESTATION)
+: CEntity(CEntity::SPACESTATION, pos, 196, 196, -1),
+  m_VisibleQuad(pos, 315, 310, CTextureManager::TEXTURE_SPACESTATION)
 {
 	m_Position = pos;
 	m_Health = 100;
@@ -26,15 +27,6 @@ CBossSpaceStation::CBossSpaceStation(sf::Vector2f pos)
 	m_DeadAnimTimer = 0L;
 	m_Timer = 0L;
 	m_Offset = 0.0f;
-
-	sf::Vector2f sizeColl(196, 196);
-	m_CollChar = sf::RectangleShape(sizeColl);
-	m_CollChar.setOrigin(sf::Vector2f(sizeColl.x/2, sizeColl.y/2));
-
-	sf::Vector2f sizeVisible(315, 310);
-	m_VisibleChar = sf::RectangleShape(sizeVisible);
-	m_VisibleChar.setOrigin(sf::Vector2f(sizeVisible.x/2, sizeVisible.y/2));
-	m_VisibleChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_SPACESTATION));
 
 	m_Status = NORMAL_ATTACK;
 }
@@ -90,11 +82,11 @@ void CBossSpaceStation::tick()
 		}
 
 		// Draw Spacestation
-		m_CollChar.setRotation(m_Rotation);
-		m_VisibleChar.setRotation(m_Rotation);
-		m_CollChar.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
-		m_VisibleChar.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
-		Core()->Window()->draw(m_VisibleChar);
+		m_VisibleQuad.setRotation(m_Rotation);
+		m_Quad.setRotation(m_Rotation);
+		m_VisibleQuad.setPosition(m_Position);
+		m_Quad.setPosition(m_Position);
+		Core()->Window()->draw(m_VisibleQuad);
 
 		// Shoot
 		sf::Vector2f orgSpawnPos(m_Position.x, m_Position.y+95.0f);
@@ -134,17 +126,17 @@ void CBossSpaceStation::tick()
 		m_Position.y += 9.0f * (m_Position.y > RSIZE_H/2)?-1:1;
 
 		int gray = random_int(45, 185);
-		m_CollChar.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
-		m_VisibleChar.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
-		m_VisibleChar.setFillColor(sf::Color(gray, gray, gray));
-		Core()->Window()->draw(m_VisibleChar);
+		m_Quad.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
+		m_VisibleQuad.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
+		m_VisibleQuad.setFillColor(sf::Color(gray, gray, gray));
+		Core()->Window()->draw(m_VisibleQuad);
 
 		if (m_DeadAnimTimer >= 300L)
 			destroy();
 
 		if (m_DeadAnimTimer < 300L && m_ShootTimer > 10)
 		{
-			sf::FloatRect collRect = m_CollChar.getGlobalBounds();
+			sf::FloatRect collRect = m_Quad.getGlobalBounds();
 
 			Core()->SoundManager()->play(CSoundManager::SOUND_EXPLOSION);
 			CEffects::createExplosion(sf::Vector2f(random_int(collRect.left, collRect.left+collRect.width), random_int(collRect.top, collRect.top+collRect.height)), true);

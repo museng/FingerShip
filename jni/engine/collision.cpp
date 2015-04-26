@@ -85,7 +85,7 @@ CTile* CCollision::intersectLineTileSolid(sf::Vector2f ipos, sf::Vector2f epos, 
 	return 0x0;
 }
 
-CEntity* CCollision::isInEntity(sf::FloatRect rectI, int type)
+CEntity* CCollision::isInEntity(sf::VertexArray &pointsA, int type)
 {
 	CGameCore *pCore = CGameCore::getInstance();
 
@@ -98,16 +98,7 @@ CEntity* CCollision::isInEntity(sf::FloatRect rectI, int type)
 			continue;
 		}
 
-		sf::FloatRect rect = (*it)->getCollChar().getGlobalBounds();
-
-		if ((*it)->getType() == CEntity::CUBE)
-		{
-			CCube *pCube = static_cast<CCube*>((*it));
-			Quad virtQuad(sf::Vector2f(rectI.left+rectI.width/2, rectI.top+rectI.height/2), rectI.width, rectI.height);
-			if (isQuadIntersecting(virtQuad, pCube->getQuad()))
-				return (*it);
-		}
-		else if (rect.intersects(rectI))
+		if (isVertexArrayIntersecting(pointsA, (*it)->getQuad().getPoints()))
 			return (*it);
 
 		++it;
@@ -116,39 +107,42 @@ CEntity* CCollision::isInEntity(sf::FloatRect rectI, int type)
 	return 0x0;
 }
 
-bool CCollision::isQuadIntersecting(Quad &a, Quad &b)
+bool CCollision::isVertexArrayIntersecting(sf::VertexArray &a, sf::VertexArray &b)
 {
-	Quad quads[2] = { a, b };
+	sf::VertexArray quads[2] = { a, b };
 
-	for (unsigned i = 0; i<2; i++)
+	for (unsigned u = 0; u<2; u++)
 	{
-        for (int i1 = 0; i1 < quads[i].getPoints().getVertexCount(); i1++)
+        for (int i1 = 0; i1 < quads[u].getVertexCount(); i1++)
         {
-        	int i2 = (i1 + 1) % quads[i].getPoints().getVertexCount();
-        	sf::Vector2f p1 = quads[i].getPoints()[i1].position;
-        	sf::Vector2f p2 = quads[i].getPoints()[i2].position;
+        	int i2 = (i1 + 1) % quads[u].getVertexCount();
+        	sf::Vector2f p1 = quads[u][i1].position;
+        	sf::Vector2f p2 = quads[u][i2].position;
 
         	sf::Vector2f normal(p2.y - p1.y, p1.x - p2.x);
+        	float rval = 0.0f;
 
-            float minA = 0.0f, maxA = 0.0f;
-            for (unsigned q = 0; q < a.getPoints().getVertexCount(); q++)
+        	rval = normal.x * a[0].position.x + normal.y * a[0].position.y;
+            float minA = rval, maxA = rval;
+            for (unsigned q = 0; q < a.getVertexCount(); q++)
             {
-            	sf::Vector2f p = a.getPoints()[q].position;
+            	sf::Vector2f p = a[q].position;
                 float projected = normal.x * p.x + normal.y * p.y;
-                if (minA == 0.0f || projected < minA)
+                if (projected < minA)
                     minA = projected;
-                if (maxA == 0.0f || projected > maxA)
+                if (projected > maxA)
                     maxA = projected;
             }
 
-            float minB = 0L, maxB = 0L;
-            for (unsigned q = 0; q < b.getPoints().getVertexCount(); q++)
+            rval = normal.x * b[0].position.x + normal.y * b[0].position.y;
+            float minB = rval, maxB = rval;
+            for (unsigned q = 0; q < b.getVertexCount(); q++)
             {
-            	sf::Vector2f p = b.getPoints()[q].position;
+            	sf::Vector2f p = b[q].position;
                 float projected = normal.x * p.x + normal.y * p.y;
-                if (minB == 0.0f || projected < minA)
+                if (projected < minA)
                     minB = projected;
-                if (maxB == 0.0f || projected > maxA)
+                if (projected > maxA)
                     maxB = projected;
             }
 

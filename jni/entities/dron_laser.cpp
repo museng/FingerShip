@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "dron_laser.h"
@@ -8,7 +8,7 @@
 #include <cmath>
 
 CDronLaser::CDronLaser(sf::Vector2f pos)
-: CEntity(CEntity::DRON_LASER)
+: CEntity(CEntity::DRON_LASER, pos, 58, 49, CTextureManager::TEXTURE_BARRIER)
 {
 	m_Active = false;
 	m_ShootSound = false;
@@ -18,11 +18,6 @@ CDronLaser::CDronLaser(sf::Vector2f pos)
 
 	m_Position = pos;
 	m_OrgPos = m_Position;
-
-	sf::Vector2f size(58, 49);
-	m_CollChar = sf::RectangleShape(size);
-	m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
-	m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_BARRIER));
 }
 CDronLaser::~CDronLaser()
 {
@@ -55,16 +50,16 @@ void CDronLaser::tick()
 
 	float dt = m_Timer.getElapsedTime().asSeconds();
 	m_Position = sf::Vector2f(m_OrgPos.x + sinf(dt)*2.5, m_OrgPos.y + cosf(dt)*2.5);
-	m_CollChar.setPosition(sf::Vector2f(m_Position.x, m_Position.y));
+	m_Quad.setPosition(m_Position);
 
 	// Check for shoot!
 	if (!m_Active && !Core()->isPaused() && Core()->Player()->m_pCharacter && m_Position.y > TILE_SIZE*2)
 	{
-		sf::FloatRect rect = m_CollChar.getGlobalBounds();
+		sf::FloatRect rect = m_Quad.getGlobalBounds();
 		for (int i= m_Position.y; i < m_Position.y+(RSIZE_H-m_Position.y/TILE_SIZE); i++)
 		{
 			rect.top++;
-			if (rect.intersects(Core()->Player()->m_pCharacter->getCollChar().getGlobalBounds()))
+			if (rect.intersects(Core()->Player()->m_pCharacter->getQuad().getGlobalBounds()))
 			{
 				m_Active = true;
 				m_LaserEnergy = 0.0f;
@@ -99,9 +94,9 @@ void CDronLaser::tick()
 
         	if (!m_Shoot) m_LaserEnergy+=2.0f;
         	else m_LaserEnergy-=2.0f;
-        	if (m_LaserEnergy > m_CollChar.getLocalBounds().width/2)
+        	if (m_LaserEnergy > m_Quad.getLocalBounds().width/2)
         	{
-        		m_LaserEnergy = m_CollChar.getLocalBounds().width/2;
+        		m_LaserEnergy = m_Quad.getLocalBounds().width/2;
         		m_Shoot = true;
         	}
         	else if (m_LaserEnergy < 0)
@@ -121,13 +116,13 @@ void CDronLaser::tick()
         	rectLaserIn.setOrigin(rectLaserIn.getLocalBounds().width/2, 0);
         	rectLaserIn.setPosition(m_Position.x, m_Position.y);
 
-    		sf::FloatRect rect = m_CollChar.getGlobalBounds();
+    		sf::FloatRect rect = m_Quad.getGlobalBounds();
     		if (Core()->Player()->m_pCharacter)
     		{
 				for (int i= m_Position.y; i < m_Position.y+(RSIZE_H-m_Position.y/TILE_SIZE); i++)
 				{
 					rect.top++;
-					if (rect.intersects(Core()->Player()->m_pCharacter->getCollChar().getGlobalBounds()))
+					if (rect.intersects(Core()->Player()->m_pCharacter->getQuad().getGlobalBounds()))
 					{
 						rectLaserOut.setSize(sf::Vector2f(m_LaserEnergy/2, Core()->Player()->m_pCharacter->getPosition().y-m_Position.y));
 						rectLaserIn.setSize(sf::Vector2f(m_LaserEnergy/2, Core()->Player()->m_pCharacter->getPosition().y-m_Position.y));
@@ -146,7 +141,7 @@ void CDronLaser::tick()
         }
     }
 
-	Core()->Window()->draw(m_CollChar);
+	Core()->Window()->draw(m_Quad);
 
 
     if (!Core()->m_DronLaserKilled)
@@ -171,7 +166,7 @@ void CDronLaser::tick()
         text.setFont(Core()->getDefaultFont());
         text.setCharacterSize(20.0f);
         text.setOrigin(0, text.getLocalBounds().height);
-        text.setPosition(sf::Vector2f(m_CollChar.getGlobalBounds().left - TILE_SIZE/2, m_CollChar.getGlobalBounds().top - TILE_SIZE/2 - 5.0f));
+        text.setPosition(sf::Vector2f(m_Quad.getGlobalBounds().left - TILE_SIZE/2, m_Quad.getGlobalBounds().top - TILE_SIZE/2 - 5.0f));
         text.setColor(sf::Color::Cyan);
         Core()->Window()->draw(text);
     }

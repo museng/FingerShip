@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #ifndef H_BOSS_SPACESTATION
@@ -22,7 +22,7 @@ protected:
 	long m_ShootTimer;
 	long m_DeadAnimTimer;
 
-	sf::RectangleShape m_VisibleChar;
+	sf::VertexArray m_VisibleChar;
 	int m_Shoots;
 	bool m_Dead;
 	int m_ShootTime;
@@ -40,6 +40,8 @@ private:
 	bool m_ToUp;
 	long m_StatusTime;
 	float m_Rotation;
+
+	Quad m_VisibleQuad; // TODO: Don't use this! use ArrayVertex for collision detection!
 };
 
 #endif

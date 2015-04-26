@@ -36,7 +36,7 @@
 #define PIXELS_IN_METER 		3779.0f
 #define MAX_METERS				15.0f
 
-#define DEBUG_MODE
+//#define DEBUG_MODE
 
 enum
 {

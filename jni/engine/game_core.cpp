@@ -62,24 +62,22 @@ CGameCore::~CGameCore()
 void CGameCore::init()
 {
 	// Load Window
-	m_pWindow = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "", sf::Style::Fullscreen);
-	if (!m_pWindow)
+	if (!(m_pWindow = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "", sf::Style::Fullscreen)))
 		return;
 	m_pWindow->setFramerateLimit(60.0f);
 	//
 
+	bool loadErrors = false;
+
 	// Load Assets
 	m_pDefFont = new sf::Font();
-	if (!m_pDefFont || !m_pDefFont->loadFromFile("fonts/Pixel Musketeer.ttf"))
-		return;
+	loadErrors = (!m_pDefFont || !m_pDefFont->loadFromFile("fonts/Pixel Musketeer.ttf"));
 
 	m_pTextureManager = new CTextureManager();
-	if (!m_pTextureManager || !m_pTextureManager->load())
-		return;
+	loadErrors = (!m_pTextureManager || !m_pTextureManager->load());
 
 	m_pSoundManager = new CSoundManager();
-	if (!m_pSoundManager || !m_pSoundManager->load())
-		return;
+	loadErrors = (!m_pSoundManager || !m_pSoundManager->load());
 	//
 
     //ANativeWindow* winNat = (ANativeWindow*)m_pWindow->getSystemHandle();
@@ -88,9 +86,13 @@ void CGameCore::init()
 	// Initialize Envirionment
 	m_pCollision = new CCollision();
 	m_pPlayer = new CPlayer();
-	if (!m_pCollision || !m_pPlayer)
+	loadErrors = (!m_pCollision || !m_pPlayer);
+
+	if (loadErrors)
+	{
+		m_pWindow->close();
 		return;
-	//
+	}
 
 	// Set Initial Screen
 	m_CurrentScreenId = CScreen::INIT;

@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "screen_game.h"
@@ -58,6 +58,20 @@ void CScreenGame::startGame()
 	Core()->SoundManager()->play(CSoundManager::SOUND_MENU_SELECT);
 	resetGame();
 	Core()->SoundManager()->playBackgroundMusic(CSoundManager::MUSIC_ZONE_A);
+
+	// Started Stars...
+	for (int i=0; i<RSIZE_W; i++)
+	{
+		for (int e=0; e<RSIZE_H; e+=TILE_SIZE/2)
+		{
+			if (random_int(0, 1000) == 5)
+			{
+				CParticleStar *pStar = new CParticleStar();
+				pStar->m_Pos = sf::Vector2f(i, e);
+				addParticle(pStar);
+			}
+		}
+	}
 }
 
 void CScreenGame::endGame()
@@ -311,9 +325,15 @@ void CScreenGame::renderHUD()
 
 		if (Core()->Collision()->Map())
 		{
-			snprintf(buff, sizeof(buff), "Velocidad: %.2f", Core()->getGameSpeed());
+			snprintf(buff, sizeof(buff), "Tiles: %d", Core()->Collision()->Map()->m_NumTilesRendered);
 			text.setString(buff);
 			text.setPosition(sf::Vector2f(5, 200));
+			text.setColor(sf::Color::Yellow);
+			Core()->Window()->draw(text);
+
+			snprintf(buff, sizeof(buff), "Velocidad: %.2f", Core()->getGameSpeed());
+			text.setString(buff);
+			text.setPosition(sf::Vector2f(5, 230));
 			text.setColor(sf::Color::Yellow);
 			Core()->Window()->draw(text);
 		}
@@ -343,7 +363,7 @@ void CScreenGame::renderHUD()
 	text.setPosition(sf::Vector2f(RSIZE_W-text.getLocalBounds().width-10.0f, 10.0f));
 	Core()->Window()->draw(text);
 
-	// Soobrecalentamiento
+	// Overheating
 	if (Core()->Player()->m_pCharacter)
 	{
 		const int maxBarSize = 200;
@@ -369,7 +389,7 @@ void CScreenGame::renderHUD()
 		}
 	}
 
-	if ((Core()->Collision()->Map()->getZone() != CMap::ZONE_D || Core()->Collision()->Map()->getZone() == CMap::ZONE_D && Core()->isPaused()) && (m_GameState == STARTED || m_GameState == PAUSED))
+	if ((Core()->Collision()->Map()->getZone() != CMap::ZONE_D || (Core()->Collision()->Map()->getZone() == CMap::ZONE_D && Core()->isPaused())) && (m_GameState == STARTED || m_GameState == PAUSED))
 	{
 		sf::RectangleShape btnPause(sf::Vector2f(64, 64));
 		btnPause.setPosition(sf::Vector2f(RSIZE_W - btnPause.getLocalBounds().width, RSIZE_H - btnPause.getLocalBounds().height - 50.0f));
@@ -395,7 +415,7 @@ void CScreenGame::renderHUD()
 
 	if (m_GameState == GAME_OVER)
 	{
-		// Efecto Zoom out
+		// Zoom out effect
 		m_TextZoomNoob -= 0.25f;
 		if (m_TextZoomNoob < 1.0f) m_TextZoomNoob = 1.0f;
 
@@ -468,7 +488,7 @@ void CScreenGame::renderHUD()
 			tap = false;
 	} else if (m_GameState == FINISHED)
 	{
-		// Efecto Zoom out
+		// Zoom out effect
 		m_TextZoomNoob -= 0.25f;
 		if (m_TextZoomNoob < 1.0f) m_TextZoomNoob = 1.0f;
 
@@ -488,7 +508,7 @@ void CScreenGame::renderHUD()
 		Core()->Window()->draw(text);
 	} else if (m_GameState == PAUSED)
 	{
-		// Efecto Zoom out
+		// Zoom out effect
 		m_TextZoomNoob += 0.05f;
 		if (m_TextZoomNoob > 1.0f) m_TextZoomNoob = 1.0f;
 

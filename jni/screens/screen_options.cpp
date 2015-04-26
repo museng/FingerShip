@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "screen_options.h"
@@ -16,7 +16,7 @@ CScreenOptions::CScreenOptions(int camW, int camH)
 	{
 		for (int e=0; e<RSIZE_H; e+=TILE_SIZE/2)
 		{
-			if (random_int(0, 1000) == 5)
+			if (random_int(0, 200) == 5)
 			{
 				CParticleStar *pStar = new CParticleStar();
 				pStar->m_Pos = sf::Vector2f(i, e);

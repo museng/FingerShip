@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #ifndef H_EFFECTS
@@ -455,7 +455,7 @@ public:
 		pParticle->m_Duration = 0.9f;
 		pParticle->m_DoMove = false;
 		pParticle->m_Dir = sf::Vector2f(random_float(-1.0f, 1.0f), random_float(-1.0f, 1.0f));
-		pParticle->m_Vel = 145.0f;
+		pParticle->m_Vel = 3.0f;
 		pParticle->m_Shape.setTexture(pCore->TextureManager()->get(CTextureManager::TEXTURE_SPACESTATION));
 		pParticle->m_Shape.setRotation(pBoss->getCollChar().getRotation());
 		pCore->getScreen()->addParticle(pParticle);

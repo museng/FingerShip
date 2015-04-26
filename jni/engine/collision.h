@@ -1,9 +1,10 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #ifndef H_COLLISION
 #define H_COLLISION
 #include "map.h"
+#include "quad.h"
 #include "../entities/entity.h"
 
 class CCollision
@@ -18,6 +19,7 @@ public:
 	class CTile* isTileSolid(sf::Vector2f pos);
 	class CTile* intersectLineTileSolid(sf::Vector2f ipos, sf::Vector2f epos, sf::Vector2f *rpos = 0x0);
 	CEntity* isInEntity(sf::FloatRect rectI, int type = -1);
+	bool isQuadIntersecting(Quad &a, Quad &b);
 
 	void reset();
 

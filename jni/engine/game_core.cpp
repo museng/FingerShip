@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "game_core.h"
@@ -21,6 +21,10 @@ CGameCore::CGameCore()
 	m_pWindow = nullptr;
 	m_pPlayer = nullptr;
 	m_pScreen = nullptr;
+	m_pCollision = nullptr;
+	m_pDefFont = nullptr;
+	m_pSoundManager = nullptr;
+	m_pTextureManager = nullptr;
 
 	m_pNextScreen = nullptr;
 	m_pPrevScreen = nullptr;
@@ -39,36 +43,43 @@ CGameCore::CGameCore()
 	m_Config.m_Language = LANGUAGE_ES;
 	m_WinFocus = true;
 	m_Paused = false;
+	m_FrameTime = 0.0f;
 
+	m_LastScreenId = m_CurrentScreenId = CScreen::INIT;
 	m_BackgroundColorTo = m_BackgroundColor = sf::Color::Black;
 }
 CGameCore::~CGameCore()
 {
-	delete m_pDefFont;
-	delete m_pScreen;
-	delete m_pCollision;
-	delete m_pPlayer;
-	delete m_pSoundManager,
-	delete m_pTextureManager;
-	delete m_pWindow;
+	if (m_pDefFont) delete m_pDefFont;
+	if (m_pScreen) delete m_pScreen;
+	if (m_pCollision) delete m_pCollision;
+	if (m_pPlayer) delete m_pPlayer;
+	if (m_pSoundManager) delete m_pSoundManager;
+	if (m_pTextureManager) delete m_pTextureManager;
+	if (m_pWindow) delete m_pWindow;
 }
 
 void CGameCore::init()
 {
 	// Load Window
 	m_pWindow = new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "", sf::Style::Fullscreen);
+	if (!m_pWindow)
+		return;
 	m_pWindow->setFramerateLimit(60.0f);
 	//
 
 	// Load Assets
 	m_pDefFont = new sf::Font();
-	m_pDefFont->loadFromFile("fonts/Pixel Musketeer.ttf");
+	if (!m_pDefFont || !m_pDefFont->loadFromFile("fonts/Pixel Musketeer.ttf"))
+		return;
 
 	m_pTextureManager = new CTextureManager();
-	m_pTextureManager->load();
+	if (!m_pTextureManager || !m_pTextureManager->load())
+		return;
 
 	m_pSoundManager = new CSoundManager();
-	m_pSoundManager->load();
+	if (!m_pSoundManager || !m_pSoundManager->load())
+		return;
 	//
 
     //ANativeWindow* winNat = (ANativeWindow*)m_pWindow->getSystemHandle();
@@ -77,6 +88,8 @@ void CGameCore::init()
 	// Initialize Envirionment
 	m_pCollision = new CCollision();
 	m_pPlayer = new CPlayer();
+	if (!m_pCollision || !m_pPlayer)
+		return;
 	//
 
 	// Set Initial Screen

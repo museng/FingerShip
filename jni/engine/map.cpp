@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "map.h"
@@ -22,6 +22,7 @@ CMap::CMap()
 	m_Status = RUN;
 	m_Zone = ZONE_A;
 	m_BossCreated = false;
+	m_NumTilesRendered = 0;
 
 	m_Width = RSIZE_W/64;
 	m_Height = 1;
@@ -189,7 +190,7 @@ void CMap::genMapZone()
 						}
 					}
 
-					if (i == 0) // En cualquierpate del eje X pero solo en la primera fila (fuera de lo que ve el usuario)
+					if (i == 0) // En cualquier parte del eje X pero solo en la primera fila (fuera de lo que ve el usuario)
 					{
 						int wr = random_int(0, SIZE_W-1); // Posicion Randmon
 						int ur = random_int(0, 20); // Randon de alta probabilidad
@@ -199,9 +200,9 @@ void CMap::genMapZone()
 
 						// Turrets
 						if (ur == ccr[0] && wr >= 0 && wr < SIZE_W-1
-							&& pNewTiles[i*m_Width+wr].m_Index&CTile::SOLID
-							&& pNewTiles[i*m_Width+(wr-1)].m_Index&CTile::SOLID
-							&& pNewTiles[i*m_Width+(wr+1)].m_Index&CTile::SOLID
+							&& (pNewTiles[i*m_Width+wr].m_Index&CTile::SOLID)
+							&& (pNewTiles[i*m_Width+(wr-1)].m_Index&CTile::SOLID)
+							&& (pNewTiles[i*m_Width+(wr+1)].m_Index&CTile::SOLID)
 							&& m_pCore->getScreen()->getEntitiesByType(CEntity::TURRET).size() < 3)
 						{
 							pNewTiles[i*m_Width+wr].m_TexIndex = 16 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
@@ -247,7 +248,7 @@ void CMap::genMapZone()
 			{
 				for (int e=0; e<SIZE_W; pNewTiles[i*m_Width+e++].m_Index = CTile::AIR); // Clean Line
 
-				if (i == 0) // En cualquierpate del eje X pero solo en la primera fila (fuera de lo que ve el usuario)
+				if (i == 0) // En cualquier parte del eje X pero solo en la primera fila (fuera de lo que ve el usuario)
 				{
 					for (int e=0; e<SIZE_W; e++)
 					{
@@ -300,7 +301,7 @@ void CMap::genMapZone()
 			{
 				for (int e=0; e<SIZE_W; pNewTiles[i*m_Width+e++].m_Index = CTile::AIR); // Clean Line
 
-				if (i == 0) // En cualquierpate del eje X pero solo en la primera fila (fuera de lo que ve el usuario)
+				if (i == 0) // En cualquier parte del eje X pero solo en la primera fila (fuera de lo que ve el usuario)
 				{
 					if (!m_BossCreated)
 					{
@@ -357,12 +358,12 @@ void CMap::genMapZone()
 			const short indexRB = (i+1)*m_Width+(e+1);
 
 			// Smooth Map
-			if (e-1 >= 0 && i-1 > 0 && i+1 <= maxH && pTiles[index].m_Index&CTile::SOLID && pTiles[indexT].m_Index == CTile::AIR && pTiles[indexB].m_Index == CTile::AIR && (pTiles[indexL].m_Index&CTile::DESTRUCTIBLE || pTiles[indexR].m_Index&CTile::DESTRUCTIBLE))
+			if (e-1 >= 0 && i-1 > 0 && i+1 <= maxH && (pTiles[index].m_Index&CTile::SOLID) && pTiles[indexT].m_Index == CTile::AIR && pTiles[indexB].m_Index == CTile::AIR && ((pTiles[indexL].m_Index&CTile::DESTRUCTIBLE) || (pTiles[indexR].m_Index&CTile::DESTRUCTIBLE)))
 			{
 				pTiles[index].m_Index = CTile::SOLID|CTile::DESTRUCTIBLE;
 				pTiles[index].m_TexIndex = 15 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 			}
-			else if (e-1 >= 0 && i-1 > 0 && i+1 <= maxH && pTiles[index].m_Index&CTile::SOLID && pTiles[indexT].m_Index == CTile::AIR && pTiles[indexB].m_Index == CTile::AIR && (pTiles[indexL].m_Index == CTile::AIR || pTiles[indexR].m_Index == CTile::AIR))
+			else if (e-1 >= 0 && i-1 > 0 && i+1 <= maxH && (pTiles[index].m_Index&CTile::SOLID) && pTiles[indexT].m_Index == CTile::AIR && pTiles[indexB].m_Index == CTile::AIR && (pTiles[indexL].m_Index == CTile::AIR || pTiles[indexR].m_Index == CTile::AIR))
 				pTiles[index].m_Index = CTile::AIR;
 
 			// Texturize!
@@ -372,28 +373,28 @@ void CMap::genMapZone()
 				if (pTiles[index].m_TexIndex == 0)
 					pTiles[index].m_TexIndex = ((random_int(0,20) == 2)?normal_tile_index[random_int(0, 2)]:7) + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 				// Esquina Inferior Derecha
-				if (e-1 >= 0 && i-1 > 0 && i+1 <= maxH && pTiles[index].m_Index&CTile::SOLID && pTiles[indexB].m_Index == CTile::AIR && pTiles[indexL].m_Index == CTile::AIR && pTiles[indexT].m_Index&CTile::SOLID)
+				if (e-1 >= 0 && i-1 > 0 && i+1 <= maxH && (pTiles[index].m_Index&CTile::SOLID) && pTiles[indexB].m_Index == CTile::AIR && pTiles[indexL].m_Index == CTile::AIR && (pTiles[indexT].m_Index&CTile::SOLID))
 					pTiles[index].m_TexIndex = 12 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 				// Esquina Inferior Izquierda
-				else if (e+1 < m_Width && i-1 >= 0 && i+1 <= maxH && pTiles[index].m_Index&CTile::SOLID && pTiles[indexB].m_Index == CTile::AIR && pTiles[indexR].m_Index == CTile::AIR && pTiles[indexT].m_Index&CTile::SOLID)
+				else if (e+1 < m_Width && i-1 >= 0 && i+1 <= maxH && (pTiles[index].m_Index&CTile::SOLID) && pTiles[indexB].m_Index == CTile::AIR && pTiles[indexR].m_Index == CTile::AIR && (pTiles[indexT].m_Index&CTile::SOLID))
 					pTiles[index].m_TexIndex = 14 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 				// Esquina Superior Derecha
-				else if (e-1 >= 0 && i-1 >= 0 && i+1 <= maxH && pTiles[index].m_Index&CTile::SOLID && pTiles[indexT].m_Index == CTile::AIR && pTiles[indexL].m_Index == CTile::AIR && pTiles[indexB].m_Index&CTile::SOLID)
+				else if (e-1 >= 0 && i-1 >= 0 && i+1 <= maxH && (pTiles[index].m_Index&CTile::SOLID) && pTiles[indexT].m_Index == CTile::AIR && pTiles[indexL].m_Index == CTile::AIR && (pTiles[indexB].m_Index&CTile::SOLID))
 					pTiles[index].m_TexIndex = 1 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 				// Esquina Superior Izquierda
-				else if (e+1 < m_Width && i-1 >= 0 && i+1 <= maxH && pTiles[index].m_Index&CTile::SOLID && pTiles[indexT].m_Index == CTile::AIR && pTiles[indexR].m_Index == CTile::AIR && pTiles[indexB].m_Index&CTile::SOLID)
+				else if (e+1 < m_Width && i-1 >= 0 && i+1 <= maxH && (pTiles[index].m_Index&CTile::SOLID) && pTiles[indexT].m_Index == CTile::AIR && pTiles[indexR].m_Index == CTile::AIR && (pTiles[indexB].m_Index&CTile::SOLID))
 					pTiles[index].m_TexIndex = 2 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 				// Esquina Inferior Derecha FIX
-				else if (e-1 >= 0 && i-1 >= 0 && i+1 <= maxH && pTiles[index].m_Index&CTile::SOLID && pTiles[indexL].m_Index&CTile::SOLID && pTiles[indexB].m_Index&CTile::SOLID && pTiles[indexLB].m_Index == CTile::AIR)
+				else if (e-1 >= 0 && i-1 >= 0 && i+1 <= maxH && (pTiles[index].m_Index&CTile::SOLID) && (pTiles[indexL].m_Index&CTile::SOLID) && (pTiles[indexB].m_Index&CTile::SOLID) && pTiles[indexLB].m_Index == CTile::AIR)
 					pTiles[index].m_TexIndex = 9 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 				// Esquina Superior Derecha FIX
-				else if (e-1 >= 0 && i-1 >= 0 && i+1 <= maxH && pTiles[index].m_Index&CTile::SOLID && pTiles[indexL].m_Index&CTile::SOLID && pTiles[indexT].m_Index&CTile::SOLID && pTiles[indexLT].m_Index == CTile::AIR)
+				else if (e-1 >= 0 && i-1 >= 0 && i+1 <= maxH && (pTiles[index].m_Index&CTile::SOLID) && (pTiles[indexL].m_Index&CTile::SOLID) && (pTiles[indexT].m_Index&CTile::SOLID) && pTiles[indexLT].m_Index == CTile::AIR)
 					pTiles[index].m_TexIndex = 3 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 				// Esquina Inferior Izquierda FIX
-				else if (e+1 < m_Width && i-1 >= 0 && i+1 <= maxH && pTiles[index].m_Index&CTile::SOLID && pTiles[indexR].m_Index&CTile::SOLID && pTiles[indexB].m_Index&CTile::SOLID && pTiles[indexRB].m_Index == CTile::AIR)
+				else if (e+1 < m_Width && i-1 >= 0 && i+1 <= maxH && (pTiles[index].m_Index&CTile::SOLID) && (pTiles[indexR].m_Index&CTile::SOLID) && (pTiles[indexB].m_Index&CTile::SOLID) && pTiles[indexRB].m_Index == CTile::AIR)
 					pTiles[index].m_TexIndex = 10 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 				// Esquina Superior Izquierda FIX
-				else if (e+1 < m_Width && i-1 >= 0 && i+1 <= maxH && pTiles[index].m_Index&CTile::SOLID && pTiles[indexR].m_Index&CTile::SOLID && pTiles[indexT].m_Index&CTile::SOLID && pTiles[indexRT].m_Index == CTile::AIR)
+				else if (e+1 < m_Width && i-1 >= 0 && i+1 <= maxH && (pTiles[index].m_Index&CTile::SOLID) && (pTiles[indexR].m_Index&CTile::SOLID) && (pTiles[indexT].m_Index&CTile::SOLID) && pTiles[indexRT].m_Index == CTile::AIR)
 					pTiles[index].m_TexIndex = 4 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 				// Lado Izquierdo
 				else if (e-1 >= 0 && pTiles[indexL].m_Index == CTile::AIR)
@@ -402,14 +403,14 @@ void CMap::genMapZone()
 				else if (e+1 < m_Width && pTiles[indexR].m_Index == CTile::AIR)
 					pTiles[index].m_TexIndex = 8 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 				// Bajo
-				else if (i+1 <= maxH && pTiles[index].m_Index&CTile::SOLID && pTiles[indexB].m_Index == CTile::AIR)
+				else if (i+1 <= maxH && (pTiles[index].m_Index&CTile::SOLID) && pTiles[indexB].m_Index == CTile::AIR)
 					pTiles[index].m_TexIndex = 13 + ((m_Zone==ZONE_A||m_Zone==ZONE_B)?0:18);
 			}
 		}
 
-		if (i == 1 && pTiles[i*m_Width].m_Index&CTile::SOLID && pTiles[(i-1)*m_Width].m_Index == CTile::AIR && pTiles[(i+1)*m_Width].m_Index == CTile::AIR)
+		if (i == 1 && (pTiles[i*m_Width].m_Index&CTile::SOLID) && pTiles[(i-1)*m_Width].m_Index == CTile::AIR && pTiles[(i+1)*m_Width].m_Index == CTile::AIR)
 			pTiles[i*m_Width].m_Index = (pTiles[i*m_Width+1].m_Index&CTile::DESTRUCTIBLE)?CTile::SOLID|CTile::DESTRUCTIBLE:CTile::AIR;
-		if (i == 1 && pTiles[i*m_Width+(m_Width-1)].m_Index&CTile::SOLID && pTiles[(i-1)*m_Width+(m_Width-1)].m_Index == CTile::AIR && pTiles[(i+1)*m_Width+(m_Width-1)].m_Index == CTile::AIR)
+		if (i == 1 && (pTiles[i*m_Width+(m_Width-1)].m_Index&CTile::SOLID) && pTiles[(i-1)*m_Width+(m_Width-1)].m_Index == CTile::AIR && pTiles[(i+1)*m_Width+(m_Width-1)].m_Index == CTile::AIR)
 			pTiles[i*m_Width+(m_Width-1)].m_Index = (pTiles[i*m_Width+(m_Width-2)].m_Index&CTile::DESTRUCTIBLE)?CTile::SOLID|CTile::DESTRUCTIBLE:CTile::AIR;
 	}
 }
@@ -417,6 +418,8 @@ void CMap::genMapZone()
 void CMap::renderMap()
 {
 	int maxH = (m_Height < SIZE_H+TILES_MARGIN*2)?m_Height:SIZE_H+TILES_MARGIN*2;
+	m_NumTilesRendered = 0;
+
 	std::list<CGroupTile>::iterator it = m_GroupTiles.begin();
 	while (it != m_GroupTiles.end())
 	{
@@ -468,6 +471,8 @@ void CMap::renderMap()
 					quad[3].color = calcColor;
 					quad[4].color = calcColor;
 					quad[5].color = calcColor;
+
+					m_NumTilesRendered++;
 				}
 			}
 		}

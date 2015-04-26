@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #ifndef H_GAME_CORE
@@ -15,7 +15,7 @@
 #include "../screens/screen.h"
 #include <list>
 
-#define GAME_VERSION			"3.3"
+#define GAME_VERSION			"3.4"
 
 #define SIZE_W 					10
 #define SIZE_H 					16
@@ -25,7 +25,7 @@
 #define TILES_MARGIN			3 // Margen superior no visible para el usuario
 #define RTILES_MARGIN			TILE_SIZE*TILES_MARGIN
 
-#define SIZE_WAY				2 // Tamaño del camino (1 + 2*2)
+#define SIZE_WAY				2 // Tamaï¿½o del camino (1 + 2*2)
 
 #define RSIZE_W					TILE_SIZE*SIZE_W
 #define RSIZE_H					TILE_SIZE*SIZE_H
@@ -36,7 +36,7 @@
 #define PIXELS_IN_METER 		3779.0f
 #define MAX_METERS				15.0f
 
-//#define DEBUG_MODE
+#define DEBUG_MODE
 
 enum
 {

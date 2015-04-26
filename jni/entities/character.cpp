@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "character.h"
@@ -85,7 +85,10 @@ void CCharacter::tick()
 			}
 
 			if (m_Move)
+			{
 				m_Position = sf::Vector2f(convCoords.x, convCoords.y);
+				if (m_Position.y > RSIZE_H-100) m_Position.y = RSIZE_H-100; // Fix: Android 5.x buttons zone
+			}
 		} else
 		{
 			m_CanShoot = true;

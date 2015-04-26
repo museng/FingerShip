@@ -1,10 +1,11 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "collision.h"
 #include "game_core.h"
 #include "basic_functions.h"
 #include "../entities/entity.h"
+#include "../entities/cube.h"
 
 CCollision::CCollision()
 {
@@ -35,7 +36,7 @@ CTile* CCollision::isTileSolid(sf::Vector2f pos)
 		return 0x0;
 
 	CTile *pTile = m_pMap->getTileAt(pos);
-	if (pTile && pTile->m_Index&CTile::SOLID)
+	if (pTile && (pTile->m_Index&CTile::SOLID))
 		return pTile;
 
 	return 0x0;
@@ -98,11 +99,63 @@ CEntity* CCollision::isInEntity(sf::FloatRect rectI, int type)
 		}
 
 		sf::FloatRect rect = (*it)->getCollChar().getGlobalBounds();
-		if (rect.intersects(rectI))
+
+		if ((*it)->getType() == CEntity::CUBE)
+		{
+			CCube *pCube = static_cast<CCube*>((*it));
+			Quad virtQuad(sf::Vector2f(rectI.left+rectI.width/2, rectI.top+rectI.height/2), rectI.width, rectI.height);
+			if (isQuadIntersecting(virtQuad, pCube->getQuad()))
+				return (*it);
+		}
+		else if (rect.intersects(rectI))
 			return (*it);
 
 		++it;
 	}
 
 	return 0x0;
+}
+
+bool CCollision::isQuadIntersecting(Quad &a, Quad &b)
+{
+	Quad quads[2] = { a, b };
+
+	for (unsigned i = 0; i<2; i++)
+	{
+        for (int i1 = 0; i1 < quads[i].getPoints().getVertexCount(); i1++)
+        {
+        	int i2 = (i1 + 1) % quads[i].getPoints().getVertexCount();
+        	sf::Vector2f p1 = quads[i].getPoints()[i1].position;
+        	sf::Vector2f p2 = quads[i].getPoints()[i2].position;
+
+        	sf::Vector2f normal(p2.y - p1.y, p1.x - p2.x);
+
+            float minA = 0.0f, maxA = 0.0f;
+            for (unsigned q = 0; q < a.getPoints().getVertexCount(); q++)
+            {
+            	sf::Vector2f p = a.getPoints()[q].position;
+                float projected = normal.x * p.x + normal.y * p.y;
+                if (minA == 0.0f || projected < minA)
+                    minA = projected;
+                if (maxA == 0.0f || projected > maxA)
+                    maxA = projected;
+            }
+
+            float minB = 0L, maxB = 0L;
+            for (unsigned q = 0; q < b.getPoints().getVertexCount(); q++)
+            {
+            	sf::Vector2f p = b.getPoints()[q].position;
+                float projected = normal.x * p.x + normal.y * p.y;
+                if (minB == 0.0f || projected < minA)
+                    minB = projected;
+                if (maxB == 0.0f || projected > maxA)
+                    maxB = projected;
+            }
+
+            if (maxA < minB || maxB < minA)
+                return false;
+        }
+	}
+
+    return true;
 }

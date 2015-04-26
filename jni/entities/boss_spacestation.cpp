@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "boss_spacestation.h"
@@ -25,6 +25,7 @@ CBossSpaceStation::CBossSpaceStation(sf::Vector2f pos)
 	m_ShootTimer = 0L;
 	m_DeadAnimTimer = 0L;
 	m_Timer = 0L;
+	m_Offset = 0.0f;
 
 	sf::Vector2f sizeColl(196, 196);
 	m_CollChar = sf::RectangleShape(sizeColl);

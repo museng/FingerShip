@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "particle.h"
@@ -19,7 +19,10 @@ CParticle::CParticle(sf::BlendMode blendMode, int render)
     m_Timer = 0L;
     m_Force = sf::Vector2f(0.0f, 0.0f);
     m_Collide = false;
+    m_Duration = 1.0f;
 }
+CParticle::~CParticle()
+{ }
 
 void CParticle::tick()
 {
@@ -113,6 +116,8 @@ CParticleStar::CParticleStar(int render)
 
 	m_Speed = random_float(3.5f, speed + speed/4);
 }
+CParticleStar::~CParticleStar()
+{ }
 
 void CParticleStar::tick()
 {
@@ -141,7 +146,10 @@ CParticleFirework::CParticleFirework(int render)
 :
 	CParticle(sf::BlendAdd, render)
 {
+	m_LightDuration = 1.0f;
 }
+CParticleFirework::~CParticleFirework()
+{ }
 
 void CParticleFirework::tick()
 {

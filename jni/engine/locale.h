@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #ifndef H_LOCALE
@@ -42,6 +42,7 @@ enum
 	RESOURCE_STR_CREDITOS,
 	RESOURCE_STR_GRAFICOS,
 	RESOURCE_STR_IDEAS_LOGO,
+	RESOURCE_STR_BETA_TESTER,
 	RESOURCE_STR_AUTOR_PROGRAMACION,
 
 	NUM_RESOURCES_STR
@@ -55,7 +56,7 @@ static const char m_sLocale[NUM_LANGUAGES][NUM_RESOURCES_STR][255] = {
 		"SALIR\0",
 		"El Reto De Los %.0f Metros\0",
 		"PULSA EN LA NAVE PARA EMPEZAR\0",
-		"Copyright (C) 2014-2015 Alexandre Diaz\0",
+		"Copyright (C) 2015-2016 Alexandre Diaz\0",
 		"OPCIONES\0",
 		"CERRAR\0",
 		"ATRAS\0",
@@ -78,6 +79,7 @@ static const char m_sLocale[NUM_LANGUAGES][NUM_RESOURCES_STR][255] = {
 		"CREDITOS\0",
 		"Graficos\0",
 		"Ideas & Logo\0",
+		"Beta-Tester\0",
 		"Autor & Programacion\0",
 	},
 	{
@@ -87,7 +89,7 @@ static const char m_sLocale[NUM_LANGUAGES][NUM_RESOURCES_STR][255] = {
 		"EXIT\0",
 		"The Challenge Of %.0f Meters\0",
 		"TAP ON THE SHIP TO START\0",
-		"Copyright (C) 2014-2015 Alexandre Diaz\0",
+		"Copyright (C) 2015-2016 Alexandre Diaz\0",
 		"OPTIONS\0",
 		"CLOSE\0",
 		"BACK\0",
@@ -110,6 +112,7 @@ static const char m_sLocale[NUM_LANGUAGES][NUM_RESOURCES_STR][255] = {
 		"CREDITS\0",
 		"Graphics\0",
 		"Ideas & Logo\0",
+		"Beta-Tester\0",
 		"Author & Programming\0",
 	},
 	{
@@ -119,7 +122,7 @@ static const char m_sLocale[NUM_LANGUAGES][NUM_RESOURCES_STR][255] = {
 		"SAIR\0",
 		"O Reto Dos %.0f Metros\0",
 		"PREME NA NAVE PARA COMEZAR\0",
-		"Copyright (C) 2014-2015 Alexandre Diaz\0",
+		"Copyright (C) 2015-2016 Alexandre Diaz\0",
 		"OPCIONS\0",
 		"PECHAR\0",
 		"VOLTAR\0",
@@ -142,6 +145,7 @@ static const char m_sLocale[NUM_LANGUAGES][NUM_RESOURCES_STR][255] = {
 		"CREDITOS\0",
 		"Graficos\0",
 		"Ideas & Logo\0",
+		"Beta-Tester\0",
 		"Autor & Programacion\0",
 	},
 };

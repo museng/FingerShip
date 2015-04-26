@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #ifndef PARTICLES_H
@@ -16,6 +16,7 @@ class CParticle
 {
 public:
     CParticle(sf::BlendMode blendMode = sf::BlendAlpha, int render = RENDER_FRONT);
+    virtual ~CParticle();
 
     virtual void tick();
 
@@ -44,6 +45,7 @@ class CParticleStar : public CParticle
 {
 public:
 	CParticleStar(int render = RENDER_BACK);
+	~CParticleStar();
 
     virtual void tick();
 
@@ -57,6 +59,7 @@ class CParticleFirework : public CParticle
 {
 public:
 	CParticleFirework(int render = RENDER_BACK);
+	~CParticleFirework();
 
     virtual void tick();
 

@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "cube.h"
@@ -6,10 +6,12 @@
 #include "../engine/game_core.h"
 #include "../engine/locale.h"
 #include "../engine/effects.h"
+#include "../engine/quad.h"
 #include <cmath>
 
 CCube::CCube(sf::Vector2f pos)
-: CEntity(CEntity::CUBE)
+: CEntity(CEntity::CUBE),
+  m_Quad(pos, 1, 1, CTextureManager::TEXTURE_CUBE)
 {
 	m_Position = pos;
 	m_Health = 6;
@@ -26,6 +28,8 @@ CCube::CCube(sf::Vector2f pos)
 	m_CollChar.setOrigin(sf::Vector2f(size.x/2, size.y/2));
 	m_CollChar.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_CUBE));
 	m_CollChar.setPosition(m_Position);
+
+	m_Quad.setSize(size.x, size.y);
 
 	m_RotDir = random_float(-0.25, 0.25);
 }
@@ -54,9 +58,14 @@ void CCube::tick()
 		destroy();
 
 	m_CollChar.setPosition(m_Position);
+	m_Quad.setPosition(m_Position);
 
 	if (!Core()->isPaused())
+	{
 		m_CollChar.setRotation(m_CollChar.getRotation()+m_RotDir);
+		m_Quad.setRotation(m_Quad.getRotation()+m_RotDir);
+	}
 
-	Core()->Window()->draw(m_CollChar);
+	//Core()->Window()->draw(m_CollChar);
+	Core()->Window()->draw(m_Quad);
 }

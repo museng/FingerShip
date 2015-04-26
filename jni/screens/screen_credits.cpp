@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "screen_credits.h"
@@ -7,7 +7,7 @@
 #include "../engine/effects.h"
 #include <cmath>
 
-#define MAX_STR_CREDITS 	7
+#define MAX_STR_CREDITS 	8
 
 
 CScreenCredits::CScreenCredits(int camW, int camH)
@@ -31,6 +31,7 @@ void CScreenCredits::tick()
 		"\0",	"Kenney Vleugels\0",
 		"\0",	"http://hasgraphics.com\0",
 		"\0",	"Antonio Ferriz\0",
+		"\0",	"Juan McKernel\0",
 		"\0",	"Alexandre Diaz\0"
 	};
 	strncpy(m_sCredits[0], CLocale::getString(RESOURCE_STR_MUSICA), sizeof(m_sCredits[0]));
@@ -39,7 +40,8 @@ void CScreenCredits::tick()
 	strncpy(m_sCredits[6], CLocale::getString(RESOURCE_STR_GRAFICOS), sizeof(m_sCredits[6]));
 	strncpy(m_sCredits[8], CLocale::getString(RESOURCE_STR_GRAFICOS), sizeof(m_sCredits[8]));
 	strncpy(m_sCredits[10], CLocale::getString(RESOURCE_STR_IDEAS_LOGO), sizeof(m_sCredits[10]));
-	strncpy(m_sCredits[12], CLocale::getString(RESOURCE_STR_AUTOR_PROGRAMACION), sizeof(m_sCredits[12]));
+	strncpy(m_sCredits[12], CLocale::getString(RESOURCE_STR_BETA_TESTER), sizeof(m_sCredits[12]));
+	strncpy(m_sCredits[14], CLocale::getString(RESOURCE_STR_AUTOR_PROGRAMACION), sizeof(m_sCredits[14]));
 	//
 
 	if (!m_End && m_Timer.getElapsedTime().asSeconds() > 4.32f)

@@ -1,9 +1,11 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #ifndef H_TEXTURE_MANAGER
 #define H_TEXTURE_MANAGER
 #include <SFML/Graphics.hpp>
+
+#define LOAD_TEXTURE(_a,_b) 	m_vpTextures[_a] = new sf::Texture(); if (!m_vpTextures[_a] || !m_vpTextures[_a]->loadFromFile(_b)) return false;
 
 class CTextureManager
 {

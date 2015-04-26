@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "screen_init.h"
@@ -18,7 +18,7 @@ CScreenInit::CScreenInit(int camW, int camH)
 	{
 		for (int e=0; e<RSIZE_H; e+=TILE_SIZE/2)
 		{
-			if (random_int(0, 1000) == 5)
+			if (random_int(0, 200) == 5)
 			{
 				CParticleStar *pStar = new CParticleStar();
 				pStar->m_Pos = sf::Vector2f(i, e);
@@ -121,7 +121,7 @@ void CScreenInit::tick()
 	textCredits.setColor(sf::Color::White);
 	textCredits.setCharacterSize(16.0f);
 	textCredits.setStyle(sf::Text::Bold);
-	textCredits.setPosition(sf::Vector2f(RSIZE_W/2 - textCredits.getLocalBounds().width/2, RSIZE_H - textCredits.getLocalBounds().height - 10.0f));
+	textCredits.setPosition(sf::Vector2f(RSIZE_W/2 - textCredits.getLocalBounds().width/2, RSIZE_H - textCredits.getLocalBounds().height - 90.0f));
 	Core()->Window()->draw(textCredits);
 
 	sf::RectangleShape btnOptions(sf::Vector2f(TILE_SIZE*3, TILE_SIZE));

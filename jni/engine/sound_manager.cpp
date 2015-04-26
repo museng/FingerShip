@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "sound_manager.h"
@@ -21,34 +21,30 @@ CSoundManager::~CSoundManager()
 
 bool CSoundManager::load()
 {
-	bool errors = false;
-
-	errors = m_vSounds[SOUND_SHOOT].loadFromFile("sfx/shoot.ogg");
-	errors = m_vSounds[SOUND_INTRO].loadFromFile("sfx/intro.ogg");
-	errors = m_vSounds[SOUND_EXPLOSION].loadFromFile("sfx/explosion.ogg");
-	errors = m_vSounds[SOUND_MENU_SELECT].loadFromFile("sfx/menu_select.ogg");
-	errors = m_vSounds[SOUND_GAME_OVER].loadFromFile("sfx/game_over.ogg");
-	errors = m_vSounds[SOUND_INIT].loadFromFile("sfx/init.ogg");
-	errors = m_vSounds[SOUND_DESTROY].loadFromFile("sfx/destroy.ogg");
-	errors = m_vSounds[SOUND_MENU_SELECT_B].loadFromFile("sfx/menu_select_b.ogg");
-	errors = m_vSounds[SOUND_MENU_CHECK].loadFromFile("sfx/menu_check.ogg");
-	errors = m_vSounds[SOUND_FIREWORK].loadFromFile("sfx/firework.ogg");
-	errors = m_vSounds[SOUND_WINNER].loadFromFile("sfx/winner.ogg");
-	errors = m_vSounds[SOUND_LASER_A].loadFromFile("sfx/laserA.ogg");
-	errors = m_vSounds[SOUND_LASER_B].loadFromFile("sfx/laserB.ogg");
-	errors = m_vSounds[SOUND_WRONG].loadFromFile("sfx/wrong.ogg");
-	errors = m_vSounds[SOUND_NO_AMMO].loadFromFile("sfx/no_ammo.ogg");
-	errors = m_vSounds[SOUND_TURRET_SHOOT].loadFromFile("sfx/turret_shoot.ogg");
-	errors = m_vSounds[SOUND_SPACEMAN_DEAD].loadFromFile("sfx/spaceman_dead.ogg");
-	errors = m_vSounds[SOUND_SPACEMAN].loadFromFile("sfx/spaceman.ogg");
-	errors = m_vSounds[SOUND_SHIELD_DOWN].loadFromFile("sfx/shield_down.ogg");
-	errors = m_vSounds[SOUND_SHIELD_UP].loadFromFile("sfx/shield_up.ogg");
-	errors = m_vSounds[SOUND_POWERUP_BAD_BOLT_A].loadFromFile("sfx/bad_bolt_a.ogg");
-	errors = m_vSounds[SOUND_POWERUP_BAD_BOLT_B].loadFromFile("sfx/bad_bolt_b.ogg");
-	errors = m_vSounds[SOUND_POWERUP].loadFromFile("sfx/powerup.ogg");
-	errors = m_vSounds[SOUND_BOSS_DAMAGE].loadFromFile("sfx/boss_damage.ogg");
-
-	return errors;
+	return (m_vSounds[SOUND_SHOOT].loadFromFile("sfx/shoot.ogg") &&
+			m_vSounds[SOUND_INTRO].loadFromFile("sfx/intro.ogg") &&
+			m_vSounds[SOUND_EXPLOSION].loadFromFile("sfx/explosion.ogg") &&
+			m_vSounds[SOUND_MENU_SELECT].loadFromFile("sfx/menu_select.ogg") &&
+			m_vSounds[SOUND_GAME_OVER].loadFromFile("sfx/game_over.ogg") &&
+			m_vSounds[SOUND_INIT].loadFromFile("sfx/init.ogg") &&
+			m_vSounds[SOUND_DESTROY].loadFromFile("sfx/destroy.ogg") &&
+			m_vSounds[SOUND_MENU_SELECT_B].loadFromFile("sfx/menu_select_b.ogg") &&
+			m_vSounds[SOUND_MENU_CHECK].loadFromFile("sfx/menu_check.ogg") &&
+			m_vSounds[SOUND_FIREWORK].loadFromFile("sfx/firework.ogg") &&
+			m_vSounds[SOUND_WINNER].loadFromFile("sfx/winner.ogg") &&
+			m_vSounds[SOUND_LASER_A].loadFromFile("sfx/laserA.ogg") &&
+			m_vSounds[SOUND_LASER_B].loadFromFile("sfx/laserB.ogg") &&
+			m_vSounds[SOUND_WRONG].loadFromFile("sfx/wrong.ogg") &&
+			m_vSounds[SOUND_NO_AMMO].loadFromFile("sfx/no_ammo.ogg") &&
+			m_vSounds[SOUND_TURRET_SHOOT].loadFromFile("sfx/turret_shoot.ogg") &&
+			m_vSounds[SOUND_SPACEMAN_DEAD].loadFromFile("sfx/spaceman_dead.ogg") &&
+			m_vSounds[SOUND_SPACEMAN].loadFromFile("sfx/spaceman.ogg") &&
+			m_vSounds[SOUND_SHIELD_DOWN].loadFromFile("sfx/shield_down.ogg") &&
+			m_vSounds[SOUND_SHIELD_UP].loadFromFile("sfx/shield_up.ogg") &&
+			m_vSounds[SOUND_POWERUP_BAD_BOLT_A].loadFromFile("sfx/bad_bolt_a.ogg") &&
+			m_vSounds[SOUND_POWERUP_BAD_BOLT_B].loadFromFile("sfx/bad_bolt_b.ogg") &&
+			m_vSounds[SOUND_POWERUP].loadFromFile("sfx/powerup.ogg") &&
+			m_vSounds[SOUND_BOSS_DAMAGE].loadFromFile("sfx/boss_damage.ogg"));
 }
 
 void CSoundManager::setSfxActive(bool status)

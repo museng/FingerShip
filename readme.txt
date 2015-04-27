@@ -6,5 +6,4 @@ warranty. In no event will the authors be held liable for any damages
 arising from the use of this software.
 
 
-Please visit http://fingership.redneboa.es for up-to-date information about 
-the game, including new versions, custom maps and much more.
+This project uses SFML Library (You will need install it).

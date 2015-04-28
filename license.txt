@@ -18,11 +18,9 @@ freely, subject to the following restrictions:
 
 ------------------------------------------------------------------------
 
-IMPORTANT NOTE! The source under src/engine/external are stripped
-libraries with their own licenses. Mostly BSD or zlib/libpng license but
-check the individual libraries.
+IMPORTANT NOTE! The assets are stripped resources with their own licenses.
 
 ------------------------------------------------------------------------
 
-With that being said, contact us if there is anything you want to do
+With that being said, contact me if there is anything you want to do
 that the license does not permit.

@@ -1,6 +1,7 @@
 bin/*
 obj/*
 libs/*
+.settings/*
 .classpath
 .project
 .cproject

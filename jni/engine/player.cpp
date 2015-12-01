@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "player.h"
@@ -19,12 +19,9 @@ void CPlayer::destroyCharacter(bool effects)
 	if (m_pCharacter != nullptr)
 	{
 		if (effects)
-		{
-			CGameCore *pCore = CGameCore::getInstance();
-			CEffects::createExplosion(m_pCharacter->getPosition(), true);
-			pCore->SoundManager()->play(CSoundManager::SOUND_EXPLOSION);
-		}
-		delete m_pCharacter;
+			m_pCharacter->destroy();
+		else
+			m_pCharacter->setToDelete();
 	}
 
 	m_pCharacter = nullptr;

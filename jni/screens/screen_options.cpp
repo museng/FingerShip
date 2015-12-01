@@ -12,26 +12,17 @@ CScreenOptions::CScreenOptions(int camW, int camH)
 	Core()->setBackgroundColor(sf::Color::Black);
 
 	// Started Stars...
-	for (int i=0; i<RSIZE_W; i++)
-	{
-		for (int e=0; e<RSIZE_H; e+=TILE_SIZE/2)
-		{
-			if (random_int(0, 200) == 5)
-			{
-				CParticleStar *pStar = new CParticleStar();
-				pStar->m_Pos = sf::Vector2f(i, e);
-				addParticle(pStar);
-			}
-		}
-	}
+	if (!Core()->m_Config.m_LowGraphics)
+		addInitStars();
 }
 CScreenOptions::~CScreenOptions()
 { }
 
 void CScreenOptions::tick()
 {
-	sf::Text text, textLowGraph, textSounds, textMusic;
+	sf::Text text, textVibration, textLowGraph, textSounds, textMusic;
 	text.setFont(Core()->getDefaultFont());
+	textVibration.setFont(Core()->getDefaultFont());
 	textLowGraph.setFont(Core()->getDefaultFont());
 	textSounds.setFont(Core()->getDefaultFont());
 	textMusic.setFont(Core()->getDefaultFont());
@@ -68,8 +59,30 @@ void CScreenOptions::tick()
 	Core()->Window()->draw(text);
 
 
+	sf::RectangleShape checkVibration(sf::Vector2f(50.0f, 50.0f));
+	checkVibration.setPosition(50.0f, 90.0f);
+	checkVibration.setFillColor(sf::Color::Black);
+	checkVibration.setOutlineThickness(2.0f);
+	checkVibration.setOutlineColor(sf::Color::Cyan);
+	Core()->Window()->draw(checkVibration);
+
+	if (Core()->m_Config.m_Vibration)
+	{
+		sf::RectangleShape checkVibrationel(sf::Vector2f(40.0f, 40.0f));
+		checkVibrationel.setPosition(55.0f, 95.0f);
+		checkVibrationel.setFillColor(sf::Color::Cyan);
+		Core()->Window()->draw(checkVibrationel);
+	}
+
+	textVibration.setString(CLocale::getString(RESOURCE_STR_VIBRACION));
+	textVibration.setColor(sf::Color::Cyan);
+	textVibration.setCharacterSize(42.0f);
+	textVibration.setStyle(sf::Text::Bold);
+	textVibration.setPosition(sf::Vector2f(120.0f, checkVibration.getGlobalBounds().top + 10.0f));
+	Core()->Window()->draw(textVibration);
+
 	sf::RectangleShape checkLowGraphs(sf::Vector2f(50.0f, 50.0f));
-	checkLowGraphs.setPosition(50.0f, 150.0f);
+	checkLowGraphs.setPosition(50.0f, 170.0f);
 	checkLowGraphs.setFillColor(sf::Color::Black);
 	checkLowGraphs.setOutlineThickness(2.0f);
 	checkLowGraphs.setOutlineColor(sf::Color::Cyan);
@@ -78,7 +91,7 @@ void CScreenOptions::tick()
 	if (Core()->m_Config.m_LowGraphics)
 	{
 		sf::RectangleShape checkLowGraphsSel(sf::Vector2f(40.0f, 40.0f));
-		checkLowGraphsSel.setPosition(55.0f, 155.0f);
+		checkLowGraphsSel.setPosition(55.0f, 175.0f);
 		checkLowGraphsSel.setFillColor(sf::Color::Cyan);
 		Core()->Window()->draw(checkLowGraphsSel);
 	}
@@ -202,11 +215,11 @@ void CScreenOptions::tick()
 	text.setColor(sf::Color(255, 255, 255, 128));
 	text.setCharacterSize(32.0f);
 	text.setStyle(sf::Text::Bold);
-	text.setPosition(sf::Vector2f(RSIZE_W-262, RSIZE_H - 95 - text.getLocalBounds().height));
+	text.setPosition(sf::Vector2f(RSIZE_W-262, RSIZE_H - 205 - text.getLocalBounds().height));
 	Core()->Window()->draw(text);
 
 	sf::RectangleShape sfml(sf::Vector2f(252, 81));
-	sfml.setPosition(sf::Vector2f(RSIZE_W-262, RSIZE_H - 91));
+	sfml.setPosition(sf::Vector2f(RSIZE_W-262, RSIZE_H-200));
 	sfml.setTexture(Core()->TextureManager()->get(CTextureManager::TEXTURE_SFML));
 	sfml.setFillColor(sf::Color(255, 255, 255, 128));
 	Core()->Window()->draw(sfml);
@@ -220,7 +233,12 @@ void CScreenOptions::tick()
     	if (btnBack.getGlobalBounds().contains(convCoords))
     	{
     		Core()->SoundManager()->play(CSoundManager::SOUND_MENU_SELECT_B);
-    		Core()->startTransitionTo(CScreen::INIT, TRANSITION_SLIDE_R);
+    		Core()->startScreenTransitionTo(CScreen::INIT, TRANSITION_SLIDE_R);
+    	}
+    	else if (checkVibration.getGlobalBounds().contains(convCoords) || textVibration.getGlobalBounds().contains(convCoords))
+    	{
+    		Core()->SoundManager()->play(CSoundManager::SOUND_MENU_CHECK);
+    		Core()->m_Config.m_Vibration = !Core()->m_Config.m_Vibration;
     	}
     	else if (checkLowGraphs.getGlobalBounds().contains(convCoords) || textLowGraph.getGlobalBounds().contains(convCoords))
     	{

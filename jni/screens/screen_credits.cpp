@@ -16,7 +16,7 @@ CScreenCredits::CScreenCredits(int camW, int camH)
 	Core()->setBackgroundColor(sf::Color::Black);
 	m_StrIndex = 0;
 	m_End = false;
-	m_TextZoomNoob = 0.0f;
+	m_TextZoom = 0.0f;
 }
 CScreenCredits::~CScreenCredits()
 { }
@@ -30,7 +30,7 @@ void CScreenCredits::tick()
 		"\0",	"www.freesound.org\0",
 		"\0",	"Kenney Vleugels\0",
 		"\0",	"http://hasgraphics.com\0",
-		"\0",	"Antonio Ferriz\0",
+		"\0",	"TakuTag [Vandal]\0",
 		"\0",	"Juan McKernel\0",
 		"\0",	"Alexandre Diaz\0"
 	};
@@ -39,7 +39,7 @@ void CScreenCredits::tick()
 	strncpy(m_sCredits[4], CLocale::getString(RESOURCE_STR_SONIDOS), sizeof(m_sCredits[4]));
 	strncpy(m_sCredits[6], CLocale::getString(RESOURCE_STR_GRAFICOS), sizeof(m_sCredits[6]));
 	strncpy(m_sCredits[8], CLocale::getString(RESOURCE_STR_GRAFICOS), sizeof(m_sCredits[8]));
-	strncpy(m_sCredits[10], CLocale::getString(RESOURCE_STR_IDEAS_LOGO), sizeof(m_sCredits[10]));
+	strncpy(m_sCredits[10], CLocale::getString(RESOURCE_STR_LOGO), sizeof(m_sCredits[10]));
 	strncpy(m_sCredits[12], CLocale::getString(RESOURCE_STR_BETA_TESTER), sizeof(m_sCredits[12]));
 	strncpy(m_sCredits[14], CLocale::getString(RESOURCE_STR_AUTOR_PROGRAMACION), sizeof(m_sCredits[14]));
 	//
@@ -56,11 +56,11 @@ void CScreenCredits::tick()
 				return;
 			}
 			else
-				Core()->startTransitionTo(CScreen::INIT, TRANSITION_SLIDE_L);
+				Core()->startScreenTransitionTo(CScreen::INIT, TRANSITION_SLIDE_L);
 		}
 		else
 		{
-			m_TextZoomNoob = 0.0f;
+			m_TextZoom = 0.0f;
 			m_StrIndex+=2;
 			m_Timer.restart();
 		}
@@ -84,9 +84,9 @@ void CScreenCredits::tick()
 	Core()->Window()->draw(text);
 
 	// Efecto Zoom out
-	m_TextZoomNoob += 0.05f;
-	if (m_TextZoomNoob > 1.0f) m_TextZoomNoob = 1.0f;
-	text.setScale(m_TextZoomNoob, m_TextZoomNoob);
+	m_TextZoom += 0.05f;
+	if (m_TextZoom > 1.0f) m_TextZoom = 1.0f;
+	text.setScale(m_TextZoom, m_TextZoom);
 
 	float dt = m_Timer.getElapsedTime().asSeconds() * 1.35f;
 	text.setString(m_sCredits[m_StrIndex + 1]);

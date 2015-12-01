@@ -15,7 +15,7 @@ CSoundManager::~CSoundManager()
 	//Stop Sounds
 	stopAll();
 	stopBackgroundMusic();
-	checkPlayedSounds();
+	cleanSoundBuffer();
 	m_vpPlaySounds.clear();
 }
 
@@ -63,7 +63,7 @@ void CSoundManager::setMusicActive(bool status)
 		stopBackgroundMusic();
 }
 
-void CSoundManager::checkPlayedSounds()
+void CSoundManager::cleanSoundBuffer()
 {
 	// Sound Manage
 	std::list<sf::Sound*>::iterator itps = m_vpPlaySounds.begin();

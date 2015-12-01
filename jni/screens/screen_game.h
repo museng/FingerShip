@@ -1,4 +1,4 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #ifndef H_SCREEN_GAME
@@ -28,7 +28,7 @@ public:
 	void createPointsEffect();
 
 protected:
-	float m_TextZoomNoob;
+	float m_TextZoom;
 	int m_GameState;
 	int m_LastMapZone;
 	bool m_End;

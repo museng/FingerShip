@@ -3,6 +3,9 @@
 
 #ifndef H_GAME_CORE
 #define H_GAME_CORE
+#include <android/log.h>
+
+#include <SFML/System/NativeActivity.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -11,11 +14,12 @@
 #include "player.h"
 #include "texture_manager.h"
 #include "sound_manager.h"
+#include "sqlite.h"
 #include "../entities/entity.h"
 #include "../screens/screen.h"
 #include <list>
 
-#define GAME_VERSION			"3.4"
+#define GAME_VERSION			"3.5"
 
 #define SIZE_W 					10
 #define SIZE_H 					16
@@ -36,7 +40,7 @@
 #define PIXELS_IN_METER 		3779.0f
 #define MAX_METERS				15.0f
 
-//#define DEBUG_MODE
+#define DEBUG_MODE
 
 enum
 {
@@ -68,6 +72,7 @@ public:
 
 	struct {
 		bool m_LowGraphics;
+		bool m_Vibration;
 		short m_Language;
 	} m_Config;
 
@@ -96,12 +101,14 @@ public:
 	class CScreen* getScreen() { return m_pScreen; }
 	int getLastScreenId() const { return m_LastScreenId; }
 	int getCurrentScreenId() const { return m_CurrentScreenId; }
-	void startTransitionTo(int id, int type);
+	void startScreenTransitionTo(int id, int type);
+	void doScreenTransitionStep();
 	float getGameSpeed();
 	bool hasFocus() const { return m_WinFocus; }
 	bool isPaused() const { return m_Paused; }
 	void setPaused(bool state);
 	void setBackgroundColor(sf::Color color) { m_BackgroundColorTo = color; }
+	void doBackgroundColorStep();
 
 	// Tiempo
 	float getFrameTime() const { return m_FrameTime; }
@@ -125,9 +132,9 @@ private:
 	sf::Clock m_FrameTimeClock;
 	sf::Clock m_GameClock;
 
-	int m_TransitionType;
-	sf::Clock m_TransitionTimer;
-	bool m_TransitionRun;
+	int m_ScreenTransitionType;
+	sf::Clock m_ScreenTransitionTimer;
+	bool m_ScreenTransitionRun;
 
 	CPlayer *m_pPlayer;
 	class CCollision *m_pCollision;
@@ -138,6 +145,8 @@ private:
 	class CScreen *m_pNextScreen;
 	int m_LastScreenId;
 	int m_CurrentScreenId;
+
+	CSqlite m_DataBase;
 
 	bool m_Paused;
 	bool m_WinFocus;

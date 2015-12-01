@@ -1,7 +1,8 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "screen.h"
+#include "../engine/basic_functions.h"
 
 CScreen::CScreen(int camW, int camH)
 {
@@ -138,5 +139,21 @@ void CScreen::clearParticles()
 	{
 		(*itp)->m_Duration = 0;
 		++itp;
+	}
+}
+
+void CScreen::addInitStars()
+{
+	for (int i=0; i<RSIZE_W; i++)
+	{
+		for (int e=0; e<RSIZE_H; e+=TILE_SIZE/2)
+		{
+			if (random_int(0, 200) == 5)
+			{
+				CParticleStar *pStar = new CParticleStar();
+				pStar->m_Pos = sf::Vector2f(i, e);
+				addParticle(pStar);
+			}
+		}
 	}
 }

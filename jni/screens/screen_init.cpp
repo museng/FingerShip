@@ -5,6 +5,7 @@
 #include "../engine/game_core.h"
 #include "../engine/locale.h"
 #include "../engine/effects.h"
+#include "../engine/android_utils.h"
 #include <cmath>
 
 CScreenInit::CScreenInit(int camW, int camH)
@@ -14,18 +15,8 @@ CScreenInit::CScreenInit(int camW, int camH)
 	Core()->setBackgroundColor(sf::Color::Black);
 
 	// Started Stars...
-	for (int i=0; i<RSIZE_W; i++)
-	{
-		for (int e=0; e<RSIZE_H; e+=TILE_SIZE/2)
-		{
-			if (random_int(0, 200) == 5)
-			{
-				CParticleStar *pStar = new CParticleStar();
-				pStar->m_Pos = sf::Vector2f(i, e);
-				addParticle(pStar);
-			}
-		}
-	}
+	if (!Core()->m_Config.m_LowGraphics)
+		addInitStars();
 }
 CScreenInit::~CScreenInit()
 { }
@@ -179,7 +170,7 @@ void CScreenInit::tick()
     		Core()->setScreen(CScreen::GAME);
     	else if (btnOptions.getGlobalBounds().contains(convCoords))
     	{
-    		Core()->startTransitionTo(CScreen::OPTIONS, TRANSITION_SLIDE_L);
+    		Core()->startScreenTransitionTo(CScreen::OPTIONS, TRANSITION_SLIDE_L);
     		Core()->SoundManager()->play(CSoundManager::SOUND_MENU_SELECT_B);
     	}
     	else if (btnClose.getGlobalBounds().contains(convCoords))
@@ -189,7 +180,7 @@ void CScreenInit::tick()
     	{
     		credits_counts++;
     		if (credits_counts == 3)
-				Core()->startTransitionTo(CScreen::CREDITS, TRANSITION_SLIDE_R);
+				Core()->startScreenTransitionTo(CScreen::CREDITS, TRANSITION_SLIDE_R);
 
     		Core()->SoundManager()->play(CSoundManager::SOUND_MENU_SELECT_B);
     	} else

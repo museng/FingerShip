@@ -5,6 +5,7 @@
 #include "../engine/game_core.h"
 #include "../engine/locale.h"
 #include "../engine/effects.h"
+#include "../engine/android_utils.h"
 #include "../entities/powerup.h"
 #include "../entities/projectile.h"
 
@@ -37,20 +38,6 @@ void CScreenGame::resetGame()
 	m_DoRotateScreen = false;
 	m_DoFinish = false;
 	m_End = false;
-
-	// Started Stars...
-	for (int i=0; i<RSIZE_W; i++)
-	{
-		for (int e=0; e<RSIZE_H; e+=TILE_SIZE/2)
-		{
-			if (random_int(0, 1000) == 5)
-			{
-				CParticleStar *pStar = new CParticleStar();
-				pStar->m_Pos = sf::Vector2f(i, e);
-				addParticle(pStar);
-			}
-		}
-	}
 }
 
 void CScreenGame::startGame()
@@ -60,18 +47,8 @@ void CScreenGame::startGame()
 	Core()->SoundManager()->playBackgroundMusic(CSoundManager::MUSIC_ZONE_A);
 
 	// Started Stars...
-	for (int i=0; i<RSIZE_W; i++)
-	{
-		for (int e=0; e<RSIZE_H; e+=TILE_SIZE/2)
-		{
-			if (random_int(0, 1000) == 5)
-			{
-				CParticleStar *pStar = new CParticleStar();
-				pStar->m_Pos = sf::Vector2f(i, e);
-				addParticle(pStar);
-			}
-		}
-	}
+	if (!Core()->m_Config.m_LowGraphics)
+		addInitStars();
 }
 
 void CScreenGame::endGame()
@@ -89,7 +66,7 @@ void CScreenGame::endGame()
 
 	m_CameraQuake = true;
 	m_QuakeTimer.restart();
-	m_TextZoomNoob = 5.0f;
+	m_TextZoom = 5.0f;
 }
 
 
@@ -107,7 +84,7 @@ void CScreenGame::onSignal(int signal)
 		Core()->SoundManager()->stopBackgroundMusic();
 		Core()->SoundManager()->play(CSoundManager::SOUND_WINNER);
 		m_DoFinish = true;
-		m_TextZoomNoob = 5.0f;
+		m_TextZoom = 5.0f;
 
 		setGameState(FINISHED);
 	}
@@ -119,7 +96,7 @@ void CScreenGame::tick()
 	static int prevGameState = -1;
 	if (Core()->isPaused() && m_GameState != PAUSED)
 	{
-		m_TextZoomNoob = 0.0f;
+		m_TextZoom = 0.0f;
 		prevGameState = m_GameState;
 		m_GameState = PAUSED;
 	}
@@ -200,6 +177,7 @@ void CScreenGame::tick()
 							m_RotateScreenTimer.restart();
 						}
 
+						CAndroidUtils::vibrate(sf::milliseconds(5));
 						Core()->SoundManager()->play(CSoundManager::SOUND_POWERUP);
 						CEffects::createPowerupPickup(pEntColl->getPosition(), pPowerup->getType());
 						pEntColl->setToDelete();
@@ -293,12 +271,18 @@ void CScreenGame::renderHUD()
 
 	char buff[128];
 
+	// Fondo Marcador
+	sf::RectangleShape rectShapeBkg(sf::Vector2f(RSIZE_W, 45.0f));
+	rectShapeBkg.setPosition(sf::Vector2f(0, 0));
+	rectShapeBkg.setFillColor(sf::Color::Black);
+	Core()->Window()->draw(rectShapeBkg);
+
 	// Puntuacion
 	snprintf(buff, sizeof(buff), "%09d", Core()->Player()->getPoints());
 	m_HudTextScore.setFont(Core()->getDefaultFont());
 	m_HudTextScore.setString(buff);
 	m_HudTextScore.setCharacterSize(25);
-	m_HudTextScore.setPosition(sf::Vector2f(10.0f, 10.0f));
+	m_HudTextScore.setPosition(sf::Vector2f(10.0f, rectShapeBkg.getLocalBounds().height/2 - m_HudTextScore.getLocalBounds().height/2 - 10.0f));
 	m_HudTextScore.setColor(Core()->Player()->getPoints()<0?sf::Color::Red:sf::Color::Green);
 	m_HudTextScore.setStyle(sf::Text::Bold);
 	Core()->Window()->draw(m_HudTextScore);
@@ -356,37 +340,40 @@ void CScreenGame::renderHUD()
 	}
 	else
 	{
-		snprintf(buff, sizeof(buff), "%s %.2f %s", CLocale::getString(RESOURCE_STR_QUEDAN), meters, CLocale::getString(RESOURCE_STR_METROS));
+		snprintf(buff, sizeof(buff), "%.2f %s", meters, CLocale::getString(RESOURCE_STR_METROS));
 		text.setColor(sf::Color::Cyan);
 	}
 	text.setString(buff);
-	text.setPosition(sf::Vector2f(RSIZE_W-text.getLocalBounds().width-10.0f, 10.0f));
+	text.setPosition(sf::Vector2f(RSIZE_W-text.getLocalBounds().width-10.0f, rectShapeBkg.getLocalBounds().height/2 - text.getLocalBounds().height/2 - 10.0f));
 	Core()->Window()->draw(text);
 
 	// Overheating
 	if (Core()->Player()->m_pCharacter)
 	{
-		const int maxBarSize = 200;
+		const int maxBarSize = 150;
+
+		sf::Color colorOut = sf::Color::White;
+		if (Core()->Player()->m_pCharacter->m_OverHeating)
+			colorOut = Core()->getGameTime().asMilliseconds()%2==0?sf::Color::White:sf::Color(255,0,0);
 		sf::RectangleShape rectShapeBorder(sf::Vector2f(maxBarSize, 15.0f));
-		rectShapeBorder.setPosition(sf::Vector2f(RSIZE_W-(maxBarSize+10), 45.0f));
+		rectShapeBorder.setPosition(sf::Vector2f(RSIZE_W/2-rectShapeBorder.getLocalBounds().width/2, rectShapeBkg.getLocalBounds().height/2 - rectShapeBorder.getLocalBounds().height/2));
 		rectShapeBorder.setFillColor(sf::Color::Transparent);
 		rectShapeBorder.setOutlineThickness(1.0f);
-		rectShapeBorder.setOutlineColor(sf::Color::White);
+		rectShapeBorder.setOutlineColor(colorOut);
 		Core()->Window()->draw(rectShapeBorder);
-
-		sf::RectangleShape rectShape(sf::Vector2f(Core()->Player()->m_pCharacter->m_OverHeat * maxBarSize * 0.01f, 15.0f));
-		rectShape.setPosition(sf::Vector2f(RSIZE_W-(maxBarSize+10), 45.0f));
-		rectShape.setFillColor(sf::Color::Red);
-		Core()->Window()->draw(rectShape);
 
 		if (Core()->Player()->m_pCharacter->m_OverHeating)
 		{
-			strncpy(buff, CLocale::getString(RESOURCE_STR_ARMA_SOBRECALENTADA), sizeof(buff));
-			text.setString(buff);
-			text.setPosition(sf::Vector2f(RSIZE_W-text.getLocalBounds().width-10.0f, 70.0f));
-			text.setColor(sf::Color::Red);
-			Core()->Window()->draw(text);
+			sf::RectangleShape rectShape(sf::Vector2f(maxBarSize, 15.0f));
+			rectShape.setPosition(sf::Vector2f(RSIZE_W/2-rectShape.getLocalBounds().width/2, rectShapeBkg.getLocalBounds().height/2 - rectShape.getLocalBounds().height/2));
+			rectShape.setFillColor(Core()->getGameTime().asMilliseconds()%2==0?sf::Color(200,0,0,150):sf::Color(255,0,0,150));
+			Core()->Window()->draw(rectShape);
 		}
+
+		sf::RectangleShape rectShape(sf::Vector2f(Core()->Player()->m_pCharacter->m_OverHeat * maxBarSize * 0.01f, 15.0f));
+		rectShape.setPosition(sf::Vector2f(RSIZE_W/2-rectShape.getLocalBounds().width/2, rectShapeBkg.getLocalBounds().height/2 - rectShape.getLocalBounds().height/2));
+		rectShape.setFillColor(sf::Color::Red);
+		Core()->Window()->draw(rectShape);
 	}
 
 	if ((Core()->Collision()->Map()->getZone() != CMap::ZONE_D || (Core()->Collision()->Map()->getZone() == CMap::ZONE_D && Core()->isPaused())) && (m_GameState == STARTED || m_GameState == PAUSED))
@@ -416,8 +403,8 @@ void CScreenGame::renderHUD()
 	if (m_GameState == GAME_OVER)
 	{
 		// Zoom out effect
-		m_TextZoomNoob -= 0.25f;
-		if (m_TextZoomNoob < 1.0f) m_TextZoomNoob = 1.0f;
+		m_TextZoom -= 0.25f;
+		if (m_TextZoom < 1.0f) m_TextZoom = 1.0f;
 
 		float ttp = USER_ZONE_LIMIT_DOWN - USER_ZONE_LIMIT_UP;
 		ttp = USER_ZONE_LIMIT_UP + ttp/2;
@@ -427,7 +414,7 @@ void CScreenGame::renderHUD()
 		text.setPosition(sf::Vector2f(RSIZE_W/2, ttp*TILE_SIZE - text.getLocalBounds().height/2));
 		text.setStyle(sf::Text::Bold);
 		text.setOrigin(text.getLocalBounds().width/2, text.getLocalBounds().height/2);
-		text.setScale(m_TextZoomNoob, m_TextZoomNoob);
+		text.setScale(m_TextZoom, m_TextZoom);
 		Core()->Window()->draw(text);
 
 		text.setScale(1.0f, 1.0f);
@@ -479,7 +466,7 @@ void CScreenGame::renderHUD()
 				Core()->setPaused(false);
 				Core()->SoundManager()->stopBackgroundMusic();
 				Core()->SoundManager()->play(CSoundManager::SOUND_MENU_SELECT_B);
-				Core()->startTransitionTo(CScreen::INIT, TRANSITION_ROLL_ZOOM_OUT);
+				Core()->startScreenTransitionTo(CScreen::INIT, TRANSITION_ROLL_ZOOM_OUT);
 			} else if (btnRestart.getGlobalBounds().contains(convCoords))
 				startGame();
 
@@ -489,8 +476,8 @@ void CScreenGame::renderHUD()
 	} else if (m_GameState == FINISHED)
 	{
 		// Zoom out effect
-		m_TextZoomNoob -= 0.25f;
-		if (m_TextZoomNoob < 1.0f) m_TextZoomNoob = 1.0f;
+		m_TextZoom -= 0.25f;
+		if (m_TextZoom < 1.0f) m_TextZoom = 1.0f;
 
 		float ttp = USER_ZONE_LIMIT_DOWN - USER_ZONE_LIMIT_UP;
 		ttp = USER_ZONE_LIMIT_UP + ttp/2;
@@ -504,13 +491,13 @@ void CScreenGame::renderHUD()
 		text.setPosition(sf::Vector2f(RSIZE_W/2, ttp*TILE_SIZE - text.getLocalBounds().height/2));
 		text.setStyle(sf::Text::Bold);
 		text.setOrigin(text.getLocalBounds().width/2, text.getLocalBounds().height/2);
-		text.setScale(m_TextZoomNoob, m_TextZoomNoob);
+		text.setScale(m_TextZoom, m_TextZoom);
 		Core()->Window()->draw(text);
 	} else if (m_GameState == PAUSED)
 	{
 		// Zoom out effect
-		m_TextZoomNoob += 0.05f;
-		if (m_TextZoomNoob > 1.0f) m_TextZoomNoob = 1.0f;
+		m_TextZoom += 0.05f;
+		if (m_TextZoom > 1.0f) m_TextZoom = 1.0f;
 
 		float ttp = USER_ZONE_LIMIT_DOWN - USER_ZONE_LIMIT_UP;
 		ttp = USER_ZONE_LIMIT_UP + ttp/2;
@@ -521,7 +508,7 @@ void CScreenGame::renderHUD()
 		text.setPosition(sf::Vector2f(RSIZE_W/2, ttp*TILE_SIZE - text.getLocalBounds().height/2));
 		text.setStyle(sf::Text::Bold);
 		text.setOrigin(text.getLocalBounds().width/2, text.getLocalBounds().height/2);
-		text.setScale(m_TextZoomNoob, m_TextZoomNoob);
+		text.setScale(m_TextZoom, m_TextZoom);
 		Core()->Window()->draw(text);
 
 		text.setScale(1.0f, 1.0f);
@@ -558,7 +545,7 @@ void CScreenGame::renderHUD()
 				Core()->setPaused(false);
 				Core()->SoundManager()->stopBackgroundMusic();
 				Core()->SoundManager()->play(CSoundManager::SOUND_MENU_SELECT_B);
-				Core()->startTransitionTo(CScreen::INIT, TRANSITION_ROLL_ZOOM_OUT);
+				Core()->startScreenTransitionTo(CScreen::INIT, TRANSITION_ROLL_ZOOM_OUT);
 			}
 
 			tap = true;

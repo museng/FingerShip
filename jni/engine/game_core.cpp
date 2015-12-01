@@ -1,10 +1,9 @@
 /* (c) Alexandre D�az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
+#include "android_utils.h"
 #include "game_core.h"
 #include "basic_functions.h"
-//#include <jni.h>
-//#include <android/native_activity.h>
 #include "effects.h"
 #include "locale.h"
 #include "../screens/screen_init.h"
@@ -13,7 +12,6 @@
 #include "../screens/screen_game_finished.h"
 #include "../screens/screen_credits.h"
 
-#include <android/log.h>
 
 CGameCore* CGameCore::m_pCoreInstance = nullptr;
 CGameCore::CGameCore()
@@ -28,9 +26,9 @@ CGameCore::CGameCore()
 
 	m_pNextScreen = nullptr;
 	m_pPrevScreen = nullptr;
-	m_TransitionType = TRANSITION_NONE;
-	m_TransitionTimer.restart();
-	m_TransitionRun = false;
+	m_ScreenTransitionType = TRANSITION_NONE;
+	m_ScreenTransitionTimer.restart();
+	m_ScreenTransitionRun = false;
 
 	m_TurretKilled = false;
 	m_MineKilled = false;
@@ -41,6 +39,7 @@ CGameCore::CGameCore()
 
 	m_Config.m_LowGraphics = false;
 	m_Config.m_Language = LANGUAGE_ES;
+	m_Config.m_Vibration = true;
 	m_WinFocus = true;
 	m_Paused = false;
 	m_FrameTime = 0.0f;
@@ -67,17 +66,23 @@ void CGameCore::init()
 	m_pWindow->setFramerateLimit(60.0f);
 	//
 
-	bool loadErrors = false;
+	int loadErrors = 0;
 
 	// Load Assets
 	m_pDefFont = new sf::Font();
-	loadErrors = (!m_pDefFont || !m_pDefFont->loadFromFile("fonts/Pixel Musketeer.ttf"));
+	if (!m_pDefFont || !m_pDefFont->loadFromFile("fonts/Pixel Musketeer.ttf"))
+		++loadErrors;
 
 	m_pTextureManager = new CTextureManager();
-	loadErrors = (!m_pTextureManager || !m_pTextureManager->load());
+	if (!m_pTextureManager || !m_pTextureManager->load())
+		++loadErrors;
 
 	m_pSoundManager = new CSoundManager();
-	loadErrors = (!m_pSoundManager || !m_pSoundManager->load());
+	if (!m_pSoundManager || !m_pSoundManager->load())
+		++loadErrors;
+
+	if (!m_DataBase.init())
+		++loadErrors;
 	//
 
     //ANativeWindow* winNat = (ANativeWindow*)m_pWindow->getSystemHandle();
@@ -86,7 +91,8 @@ void CGameCore::init()
 	// Initialize Envirionment
 	m_pCollision = new CCollision();
 	m_pPlayer = new CPlayer();
-	loadErrors = (!m_pCollision || !m_pPlayer);
+	if (!m_pCollision || !m_pPlayer)
+		++loadErrors;
 
 	if (loadErrors)
 	{
@@ -104,7 +110,7 @@ void CGameCore::init()
     {
     	m_FrameTime = m_FrameTimeClock.restart().asSeconds();
 
-    	SoundManager()->checkPlayedSounds(); // Clean Sounds Buffer
+    	SoundManager()->cleanSoundBuffer(); // Clean Sounds Buffer
 
     	// Events
         sf::Event event;
@@ -136,153 +142,41 @@ void CGameCore::init()
         }
         //
 
-        if (hasFocus())
+        if (!hasFocus())
         {
-			// Draw Game
-        	if (m_BackgroundColor.r < m_BackgroundColorTo.r) m_BackgroundColor.r++;
-        	else if (m_BackgroundColor.r > m_BackgroundColorTo.r) m_BackgroundColor.r--;
-        	if (m_BackgroundColor.g < m_BackgroundColorTo.g) m_BackgroundColor.g++;
-        	else if (m_BackgroundColor.g > m_BackgroundColorTo.g) m_BackgroundColor.g--;
-        	if (m_BackgroundColor.b < m_BackgroundColorTo.b) m_BackgroundColor.b++;
-        	else if (m_BackgroundColor.b > m_BackgroundColorTo.b) m_BackgroundColor.b--;
-        	if (m_BackgroundColor.a < m_BackgroundColorTo.a) m_BackgroundColor.a++;
-        	else if (m_BackgroundColor.a > m_BackgroundColorTo.a) m_BackgroundColor.a--;
-			m_pWindow->clear(m_BackgroundColor);
-
-			// Render Screen & Transitions
-			if (m_TransitionRun)
-			{
-				if (m_TransitionType == TRANSITION_SLIDE_L)
-				{
-					m_pNextScreen->Camera()->move(30.0f, 0.0f);
-					m_pPrevScreen->Camera()->move(30.0f, 0.0f);
-					sf::Vector2f nsp = m_pNextScreen->Camera()->getCenter();
-					sf::FloatRect sp = m_pPrevScreen->Camera()->getViewport();
-
-
-					m_pScreen = m_pPrevScreen;
-					m_pWindow->setView(m_pScreen->updateCamera());
-					m_pScreen->tick();
-
-					m_pScreen = m_pNextScreen;
-					m_pWindow->setView(m_pNextScreen->updateCamera());
-					m_pScreen->tick();
-
-					sf::Vector2f camSize = m_pScreen->Camera()->getSize();
-					if (nsp.x-camSize.x/2 > 0.0f)
-					{
-						delete m_pPrevScreen;
-						m_pScreen = m_pNextScreen;
-						m_pPrevScreen = nullptr;
-						m_pNextScreen = nullptr;
-						m_TransitionRun = false;
-
-						m_pScreen->Camera()->setCenter(camSize.x/2, camSize.y/2);
-						m_pWindow->setView(m_pScreen->updateCamera());
-						m_pScreen->m_InputActive = true;
-					}
-				}
-				else if (m_TransitionType == TRANSITION_SLIDE_R)
-				{
-					m_pNextScreen->Camera()->move(-30.0f, 0.0f);
-					m_pPrevScreen->Camera()->move(-30.0f, 0.0f);
-					sf::Vector2f nsp = m_pNextScreen->Camera()->getCenter();
-					sf::FloatRect sp = m_pPrevScreen->Camera()->getViewport();
-
-
-					m_pScreen = m_pPrevScreen;
-					m_pWindow->setView(m_pScreen->updateCamera());
-					m_pScreen->tick();
-
-					m_pScreen = m_pNextScreen;
-					m_pWindow->setView(m_pNextScreen->updateCamera());
-					m_pScreen->tick();
-
-					sf::Vector2f camSize = m_pScreen->Camera()->getSize();
-					if (nsp.x-camSize.x/2 < 0.0f)
-					{
-						delete m_pPrevScreen;
-						m_pScreen = m_pNextScreen;
-						m_pPrevScreen = nullptr;
-						m_pNextScreen = nullptr;
-						m_TransitionRun = false;
-
-						m_pScreen->Camera()->setCenter(camSize.x/2, camSize.y/2);
-						m_pWindow->setView(m_pScreen->updateCamera());
-						m_pScreen->m_InputActive = true;
-					}
-				}
-				else if (m_TransitionType == TRANSITION_SLIDE_DIAGONAL_LU)
-				{
-					sf::Vector2f camSize = m_pPrevScreen->Camera()->getSize();
-					sf::Vector2f direction = vector_normalize(camSize);
-
-					m_pNextScreen->Camera()->move(30.0f*direction.x, 30.0f*direction.y);
-					m_pPrevScreen->Camera()->move(30.0f*direction.x, 30.0f*direction.y);
-					sf::Vector2f nsp = m_pNextScreen->Camera()->getCenter();
-					sf::FloatRect sp = m_pPrevScreen->Camera()->getViewport();
-
-
-					m_pScreen = m_pPrevScreen;
-					m_pWindow->setView(m_pScreen->updateCamera());
-					m_pScreen->tick();
-
-					m_pScreen = m_pNextScreen;
-					m_pWindow->setView(m_pNextScreen->updateCamera());
-					m_pScreen->tick();
-
-					if (nsp.x-camSize.x/2 > 0.0f)
-					{
-						delete m_pPrevScreen;
-						m_pScreen = m_pNextScreen;
-						m_pNextScreen = nullptr;
-						m_pPrevScreen = nullptr;
-						m_TransitionRun = false;
-
-						m_pScreen->Camera()->setCenter(camSize.x/2, camSize.y/2);
-						m_pWindow->setView(m_pScreen->updateCamera());
-						m_pScreen->m_InputActive = true;
-					}
-				}
-				else if (m_TransitionType == TRANSITION_ROLL_ZOOM_OUT)
-				{
-					sf::Vector2f camSize = m_pScreen->Camera()->getSize();
-
-					m_pScreen = m_pNextScreen;
-					m_pScreen->Camera()->reset(sf::FloatRect(0, 0, RSIZE_W, RSIZE_H));
-					m_pWindow->setView(m_pScreen->updateCamera());
-					m_pScreen->tick();
-
-					m_pScreen = m_pPrevScreen;
-					m_pScreen->Camera()->zoom(1.15f);
-					m_pScreen->Camera()->rotate(10.0f);
-					m_pWindow->setView(m_pScreen->updateCamera());
-					m_pScreen->tick();
-
-					if (camSize.x > RSIZE_W*8)
-					{
-						delete m_pPrevScreen;
-						m_pScreen = m_pNextScreen;
-						m_pNextScreen = nullptr;
-						m_pPrevScreen = nullptr;
-						m_TransitionRun = false;
-
-						m_pScreen->Camera()->zoom(1.0f);
-						m_pScreen->Camera()->reset(sf::FloatRect(0, 0, RSIZE_W, RSIZE_H));
-						m_pWindow->setView(m_pScreen->updateCamera());
-						m_pScreen->m_InputActive = true;
-					}
-				}
-			}
-			else
-			{
-				m_pWindow->setView(m_pScreen->updateCamera());
-				m_pScreen->tick();
-			}
-
-			m_pWindow->display();
+        	sf::sleep(sf::milliseconds(1.0f));
+			continue;
         }
+
+		// Draw Game
+		doBackgroundColorStep();
+		m_pWindow->clear(m_BackgroundColor);
+
+		// Render Screen & Transitions
+		if (m_ScreenTransitionRun)
+		{
+			doScreenTransitionStep();
+		}
+		else
+		{
+			m_pWindow->setView(m_pScreen->updateCamera());
+			m_pScreen->tick();
+		}
+
+		m_pWindow->display();
     }
+}
+
+void CGameCore::doBackgroundColorStep()
+{
+	if (m_BackgroundColor.r < m_BackgroundColorTo.r) m_BackgroundColor.r++;
+	else if (m_BackgroundColor.r > m_BackgroundColorTo.r) m_BackgroundColor.r--;
+	if (m_BackgroundColor.g < m_BackgroundColorTo.g) m_BackgroundColor.g++;
+	else if (m_BackgroundColor.g > m_BackgroundColorTo.g) m_BackgroundColor.g--;
+	if (m_BackgroundColor.b < m_BackgroundColorTo.b) m_BackgroundColor.b++;
+	else if (m_BackgroundColor.b > m_BackgroundColorTo.b) m_BackgroundColor.b--;
+	if (m_BackgroundColor.a < m_BackgroundColorTo.a) m_BackgroundColor.a++;
+	else if (m_BackgroundColor.a > m_BackgroundColorTo.a) m_BackgroundColor.a--;
 }
 
 void CGameCore::setScreen(int id)
@@ -308,7 +202,7 @@ void CGameCore::setScreen(int id)
 	m_CurrentScreenId = id;
 }
 
-void CGameCore::startTransitionTo(int id, int type)
+void CGameCore::startScreenTransitionTo(int id, int type)
 {
 	if (id < 0 || id >= CScreen::MAX_SCREENS)
 		return;
@@ -329,9 +223,9 @@ void CGameCore::startTransitionTo(int id, int type)
 	else if (id == CScreen::CREDITS)
 		m_pNextScreen = new CScreenCredits(RSIZE_W, RSIZE_H);
 
-	m_TransitionType = type;
-	m_TransitionTimer.restart();
-	m_TransitionRun = true;
+	m_ScreenTransitionType = type;
+	m_ScreenTransitionTimer.restart();
+	m_ScreenTransitionRun = true;
 
 	if (type == TRANSITION_SLIDE_L)
 		m_pNextScreen->Camera()->move(-RSIZE_W, 0);
@@ -345,6 +239,131 @@ void CGameCore::startTransitionTo(int id, int type)
 
 	m_LastScreenId = m_CurrentScreenId;
 	m_CurrentScreenId = id;
+}
+
+void CGameCore::doScreenTransitionStep()
+{
+	if (m_ScreenTransitionType == TRANSITION_SLIDE_L)
+	{
+		m_pNextScreen->Camera()->move(30.0f, 0.0f);
+		m_pPrevScreen->Camera()->move(30.0f, 0.0f);
+		sf::Vector2f nsp = m_pNextScreen->Camera()->getCenter();
+		sf::FloatRect sp = m_pPrevScreen->Camera()->getViewport();
+
+
+		m_pScreen = m_pPrevScreen;
+		m_pWindow->setView(m_pScreen->updateCamera());
+		m_pScreen->tick();
+
+		m_pScreen = m_pNextScreen;
+		m_pWindow->setView(m_pNextScreen->updateCamera());
+		m_pScreen->tick();
+
+		sf::Vector2f camSize = m_pScreen->Camera()->getSize();
+		if (nsp.x-camSize.x/2 > 0.0f)
+		{
+			delete m_pPrevScreen;
+			m_pScreen = m_pNextScreen;
+			m_pPrevScreen = nullptr;
+			m_pNextScreen = nullptr;
+			m_ScreenTransitionRun = false;
+
+			m_pScreen->Camera()->setCenter(camSize.x/2, camSize.y/2);
+			m_pWindow->setView(m_pScreen->updateCamera());
+			m_pScreen->m_InputActive = true;
+		}
+	}
+	else if (m_ScreenTransitionType == TRANSITION_SLIDE_R)
+	{
+		m_pNextScreen->Camera()->move(-30.0f, 0.0f);
+		m_pPrevScreen->Camera()->move(-30.0f, 0.0f);
+		sf::Vector2f nsp = m_pNextScreen->Camera()->getCenter();
+		sf::FloatRect sp = m_pPrevScreen->Camera()->getViewport();
+
+
+		m_pScreen = m_pPrevScreen;
+		m_pWindow->setView(m_pScreen->updateCamera());
+		m_pScreen->tick();
+
+		m_pScreen = m_pNextScreen;
+		m_pWindow->setView(m_pNextScreen->updateCamera());
+		m_pScreen->tick();
+
+		sf::Vector2f camSize = m_pScreen->Camera()->getSize();
+		if (nsp.x-camSize.x/2 < 0.0f)
+		{
+			delete m_pPrevScreen;
+			m_pScreen = m_pNextScreen;
+			m_pPrevScreen = nullptr;
+			m_pNextScreen = nullptr;
+			m_ScreenTransitionRun = false;
+
+			m_pScreen->Camera()->setCenter(camSize.x/2, camSize.y/2);
+			m_pWindow->setView(m_pScreen->updateCamera());
+			m_pScreen->m_InputActive = true;
+		}
+	}
+	else if (m_ScreenTransitionType == TRANSITION_SLIDE_DIAGONAL_LU)
+	{
+		sf::Vector2f camSize = m_pPrevScreen->Camera()->getSize();
+		sf::Vector2f direction = vector_normalize(camSize);
+
+		m_pNextScreen->Camera()->move(30.0f*direction.x, 30.0f*direction.y);
+		m_pPrevScreen->Camera()->move(30.0f*direction.x, 30.0f*direction.y);
+		sf::Vector2f nsp = m_pNextScreen->Camera()->getCenter();
+		sf::FloatRect sp = m_pPrevScreen->Camera()->getViewport();
+
+
+		m_pScreen = m_pPrevScreen;
+		m_pWindow->setView(m_pScreen->updateCamera());
+		m_pScreen->tick();
+
+		m_pScreen = m_pNextScreen;
+		m_pWindow->setView(m_pNextScreen->updateCamera());
+		m_pScreen->tick();
+
+		if (nsp.x-camSize.x/2 > 0.0f)
+		{
+			delete m_pPrevScreen;
+			m_pScreen = m_pNextScreen;
+			m_pNextScreen = nullptr;
+			m_pPrevScreen = nullptr;
+			m_ScreenTransitionRun = false;
+
+			m_pScreen->Camera()->setCenter(camSize.x/2, camSize.y/2);
+			m_pWindow->setView(m_pScreen->updateCamera());
+			m_pScreen->m_InputActive = true;
+		}
+	}
+	else if (m_ScreenTransitionType == TRANSITION_ROLL_ZOOM_OUT)
+	{
+		sf::Vector2f camSize = m_pScreen->Camera()->getSize();
+
+		m_pScreen = m_pNextScreen;
+		m_pScreen->Camera()->reset(sf::FloatRect(0, 0, RSIZE_W, RSIZE_H));
+		m_pWindow->setView(m_pScreen->updateCamera());
+		m_pScreen->tick();
+
+		m_pScreen = m_pPrevScreen;
+		m_pScreen->Camera()->zoom(1.15f);
+		m_pScreen->Camera()->rotate(10.0f);
+		m_pWindow->setView(m_pScreen->updateCamera());
+		m_pScreen->tick();
+
+		if (camSize.x > RSIZE_W*8)
+		{
+			delete m_pPrevScreen;
+			m_pScreen = m_pNextScreen;
+			m_pNextScreen = nullptr;
+			m_pPrevScreen = nullptr;
+			m_ScreenTransitionRun = false;
+
+			m_pScreen->Camera()->zoom(1.0f);
+			m_pScreen->Camera()->reset(sf::FloatRect(0, 0, RSIZE_W, RSIZE_H));
+			m_pWindow->setView(m_pScreen->updateCamera());
+			m_pScreen->m_InputActive = true;
+		}
+	}
 }
 
 void CGameCore::setPaused(bool state)

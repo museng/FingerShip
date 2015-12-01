@@ -414,7 +414,6 @@ public:
 		pParticle->m_Pos = sf::Vector2f(pos.x, pos.y);
 		pParticle->m_SizeInit = sf::Vector2f(18.0f, 18.0f);
 		pParticle->m_SizeEnd = sf::Vector2f(24.0f, 24.0f);
-		pParticle->m_ColorInit = color;
 		pParticle->m_ColorEnd = sf::Color::Black;
 		pParticle->m_ColorEnd.a = 0;
 		pParticle->m_Duration = 2.15f;

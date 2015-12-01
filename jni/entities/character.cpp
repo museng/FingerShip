@@ -3,6 +3,7 @@
 
 #include "character.h"
 #include "projectile.h"
+#include "../engine/android_utils.h"
 #include "../engine/particle.h"
 #include "../engine/effects.h"
 
@@ -29,7 +30,9 @@ CCharacter::~CCharacter()
 
 void CCharacter::destroy()
 {
-	CEffects::createExplosion(m_Position, false);
+	CAndroidUtils::vibrate(sf::milliseconds(200));
+	CEffects::createExplosion(m_Position, true);
+	Core()->SoundManager()->play(CSoundManager::SOUND_EXPLOSION);
 	Core()->SoundManager()->play(CSoundManager::SOUND_DESTROY);
 
 	CEntity::destroy();
@@ -62,6 +65,7 @@ void CCharacter::tick()
 					m_CanShoot = false;
 					if (!m_OverHeating)
 					{
+						CAndroidUtils::vibrate(sf::milliseconds(10));
 						Core()->getScreen()->addEntity(new CProjectile(getType(), m_Position, sf::Color::Red, sf::Vector2f(0.0f, -1.0f), 10.0f));
 						Core()->SoundManager()->play(CSoundManager::SOUND_SHOOT);
 						m_OverHeat += 5.0f;
@@ -135,5 +139,6 @@ void CCharacter::giveShield()
 void CCharacter::dropShield()
 {
 	m_Shield = false;
+	CAndroidUtils::vibrate(sf::milliseconds(30));
 	Core()->SoundManager()->play(CSoundManager::SOUND_SHIELD_DOWN);
 }

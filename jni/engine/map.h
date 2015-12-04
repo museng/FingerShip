@@ -61,7 +61,10 @@ public:
 		ZONE_B,
 		ZONE_C,
 		ZONE_D,
+		NUM_ZONES,
 	};
+
+	float metersToZone[NUM_ZONES];
 
 	CMap();
 	~CMap();
@@ -78,9 +81,10 @@ public:
 
 	void setStatus(int status) { m_Status = status; }
 	int getZone() const { return m_Zone; }
+	void setZone(int zone);
 
 	void render();
-	CTile* getTileAt(sf::Vector2f);
+	CTile* getTileAt(sf::Vector2f &pos);
 
 private:
 	class CGameCore *m_pCore;
@@ -101,8 +105,8 @@ private:
 	int m_WayPosW;
 
 	int m_Status;
-	int m_Zone;
 	bool m_BossCreated;
+	int m_Zone;
 };
 
 #endif

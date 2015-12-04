@@ -60,11 +60,16 @@ inline sf::Vector2f angle_to_direction(float angle)
 	return sf::Vector2f(cosf(angle), sinf(angle));
 }
 
+
 /// DEBUG
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+	void get_internal_file_path(const char *filePath, char *finalPath, size_t size);
+
 	void dbg_msg(const char *sys, const char *fmt, ...);
+
 #ifdef __cplusplus
 }
 #endif

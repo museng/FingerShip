@@ -7,6 +7,7 @@
 #include "../engine/locale.h"
 #include "../engine/basic_functions.h"
 #include "../engine/effects.h"
+#include "../engine/android_utils.h"
 #include "../screens/screen_game.h"
 #include <cmath>
 
@@ -88,6 +89,17 @@ void CBossSpaceStation::tick()
 		m_Quad.setPosition(m_Position);
 		Core()->Window()->draw(m_VisibleQuad);
 
+		// Draw Health
+		char buff[4]={0};
+		snprintf(buff, sizeof(buff), "%d", m_Health);
+		sf::Text text;
+		text.setFont(Core()->getDefaultFont());
+		text.setString(buff);
+		text.setStyle(sf::Text::Bold);
+		text.setPosition(m_Position - sf::Vector2f(text.getLocalBounds().width/2, text.getLocalBounds().height/2));
+		text.setColor(sf::Color::Yellow);
+		Core()->Window()->draw(text);
+
 		// Shoot
 		sf::Vector2f orgSpawnPos(m_Position.x, m_Position.y+95.0f);
 		sf::Vector2f vSpawns[] = { orgSpawnPos, orgSpawnPos, orgSpawnPos, orgSpawnPos, orgSpawnPos };
@@ -138,6 +150,7 @@ void CBossSpaceStation::tick()
 		{
 			sf::FloatRect collRect = m_Quad.getGlobalBounds();
 
+			CAndroidUtils::vibrate(sf::milliseconds(20));
 			Core()->SoundManager()->play(CSoundManager::SOUND_EXPLOSION);
 			CEffects::createExplosion(sf::Vector2f(random_int(collRect.left, collRect.left+collRect.width), random_int(collRect.top, collRect.top+collRect.height)), true);
 			m_ShootTimer = 0L;

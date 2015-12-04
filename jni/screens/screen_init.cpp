@@ -59,6 +59,7 @@ void CScreenInit::tick()
 	}
 
 	CScreen::renderBack();
+	CScreen::render();
 	CScreen::renderFront();
 
 	text.setString("FingerShip");
@@ -161,7 +162,7 @@ void CScreenInit::tick()
 	Core()->Window()->draw(character);
 
 	// Actions in Screen
-	static int credits_counts = 0;
+	static short credits_counts = 0;
 	static bool tap = false;
     if (m_InputActive && sf::Touch::isDown(0) && !tap)
     {

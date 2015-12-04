@@ -98,6 +98,7 @@ void CScreenCredits::tick()
 	Core()->Window()->draw(text);
 
 
+	CScreen::render();
 	CScreen::renderFront();
 }
 

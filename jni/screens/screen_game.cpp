@@ -12,6 +12,7 @@
 CScreenGame::CScreenGame(int camW, int camH)
 : CScreen(camW, camH)
 {
+	m_LastMapZone = -1;
 	startGame();
 }
 CScreenGame::~CScreenGame()
@@ -44,11 +45,13 @@ void CScreenGame::startGame()
 {
 	Core()->SoundManager()->play(CSoundManager::SOUND_MENU_SELECT);
 	resetGame();
-	Core()->SoundManager()->playBackgroundMusic(CSoundManager::MUSIC_ZONE_A);
 
 	// Started Stars...
 	if (!Core()->m_Config.m_LowGraphics)
 		addInitStars();
+
+	if (m_LastMapZone != -1)
+		Core()->Collision()->Map()->setZone(m_LastMapZone);
 }
 
 void CScreenGame::endGame()
@@ -137,6 +140,7 @@ void CScreenGame::tick()
 						Core()->Player()->m_pCharacter->m_OverHeating = false;
 						CEffects::createStarExplosion(Core()->Player()->m_pCharacter->getPosition());
 						Core()->SoundManager()->play(CSoundManager::SOUND_SPACEMAN);
+						CAndroidUtils::vibrate(sf::milliseconds(40));
 
 						// Reset Entities
 						std::list<CEntity*>::iterator it = getEntities()->begin();
@@ -203,14 +207,16 @@ void CScreenGame::tick()
 	// Render Stuff
 	CScreen::renderBack();
 
-	m_LastMapZone = Core()->Collision()->Map()->getZone();
 	Core()->Collision()->Map()->render();
+
 	if (Core()->Player()->m_pCharacter)
 		Core()->Player()->m_pCharacter->tick();
 
-	CScreen::renderFront();
+	CScreen::render();
 
 	renderHUD();
+
+	CScreen::renderFront();
 }
 
 sf::View& CScreenGame::updateCamera()
@@ -288,7 +294,8 @@ void CScreenGame::renderHUD()
 	Core()->Window()->draw(m_HudTextScore);
 
 	// Debug
-	#ifdef DEBUG_MODE
+	if (Core()->m_Config.m_Debug)
+	{
 		snprintf(buff, sizeof(buff), "Entidades: %d", m_vpEntities.size());
 		text.setString(buff);
 		text.setPosition(sf::Vector2f(5, 110));
@@ -321,7 +328,7 @@ void CScreenGame::renderHUD()
 			text.setColor(sf::Color::Yellow);
 			Core()->Window()->draw(text);
 		}
-	#endif
+	}
 
 	// Metros
 	float meters =  MAX_METERS - Core()->Collision()->Map()->m_OffsetY/PIXELS_IN_METER;
@@ -332,7 +339,7 @@ void CScreenGame::renderHUD()
 		{
 			std::list<CEntity*>::iterator itBoss = vBoss.begin();
 			CBossSpaceStation *pBoss = static_cast<CBossSpaceStation*>((*itBoss));
-			snprintf(buff, sizeof(buff), "[%s %d] %s", CLocale::getString(RESOURCE_STR_VIDA), pBoss->m_Health, CLocale::getString(RESOURCE_STR_JEFE_FINAL));
+			snprintf(buff, sizeof(buff), "%s", CLocale::getString(RESOURCE_STR_JEFE_FINAL));
 			text.setColor(sf::Color(random_int(128,255), 0, 0, 255));
 		}
 		else // TODO: Dudo que sea realmente necesario esto...
@@ -556,6 +563,19 @@ void CScreenGame::renderHUD()
 
 void CScreenGame::setGameState(int state)
 {
+	if (state == GAME_OVER)
+	{
+		float meters = MAX_METERS - Core()->Collision()->Map()->m_OffsetY/PIXELS_IN_METER;
+		int score = Core()->Player()->getPoints();
+
+		if (meters > Core()->m_Config.m_BestDistance)
+			Core()->m_Config.m_BestDistance = meters;
+		if (score > Core()->m_Config.m_BestScore)
+			Core()->m_Config.m_BestScore = score;
+
+		m_LastMapZone = Core()->Collision()->Map()->getZone();
+	}
+
 	m_GameState = state;
 }
 

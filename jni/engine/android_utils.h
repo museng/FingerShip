@@ -12,6 +12,20 @@ class CAndroidUtils
 {
 public:
 
+	static void get_internal_file_path(char *finalPath, size_t bsize, const char *filePath)
+	{
+		ANativeActivity *pNatAct =  sf::getNativeActivity();
+		memset(finalPath, 0, bsize);
+		snprintf(finalPath, bsize, "%s/%s", pNatAct->internalDataPath, filePath);
+	}
+
+	static void get_external_file_path(char *finalPath, size_t bsize, const char *filePath)
+	{
+		ANativeActivity *pNatAct =  sf::getNativeActivity();
+		memset(finalPath, 0, bsize);
+		snprintf(finalPath, bsize, "%s/%s", pNatAct->externalDataPath, filePath);
+	}
+
 	// Original source by MarioLiebisch (https://github.com/SFML/SFML/blob/7272c0b2ac7fbbdc9923e8d4873178db1875261b/examples/android/jni/main.cpp)
 	static void vibrate(sf::Time duration)
 	{

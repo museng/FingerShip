@@ -60,7 +60,7 @@ void CScreen::renderBack()
 	}
 }
 
-void CScreen::renderFront()
+void CScreen::render()
 {
 	// Entities Manage
 	std::list<CEntity*>::iterator it = m_vpEntities.begin();
@@ -76,7 +76,10 @@ void CScreen::renderFront()
 			++it;
 		}
 	}
+}
 
+void CScreen::renderFront()
+{
 	// Particles Draw
 	std::list<CParticle*>::iterator itp = m_vpParticles.begin();
 	while (itp != m_vpParticles.end())

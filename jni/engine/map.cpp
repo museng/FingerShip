@@ -18,6 +18,11 @@ CMap::CMap()
 :
  m_Tilemap(sf::Triangles, SIZE_W*(SIZE_H+TILES_MARGIN*2)*3*2)
 {
+	metersToZone[ZONE_A] = 0.0f;
+	metersToZone[ZONE_B] = 5.0f;
+	metersToZone[ZONE_C] = 9.0f;
+	metersToZone[ZONE_D] = MAX_METERS;
+
 	m_pCore = CGameCore::getInstance();
 	m_Status = RUN;
 	m_Zone = ZONE_A;
@@ -26,7 +31,7 @@ CMap::CMap()
 
 	m_Width = RSIZE_W/64;
 	m_Height = 1;
-	m_OffsetX = m_OffsetY = 0;
+	m_OffsetX = m_OffsetY = 0.0f;
 	m_IndexGroupTileGame = -1;
 	m_Speed = 5;
 	m_GenEnemyShips = false;
@@ -43,7 +48,7 @@ CMap::CMap()
 	m_WayPosW = m_Width/2;
 
 	srand(581987);
-	m_pCore->setBackgroundColor(sf::Color::Black);
+	setZone(ZONE_A);
 }
 CMap::~CMap()
 {
@@ -75,35 +80,16 @@ void CMap::render()
 		m_OffsetY += m_Speed;
 	}
 
-	static const float metersToZoneB = 5.0f;
-	static const float metersToZoneC = 9.0f;
-	static const float metersToZoneD = MAX_METERS;
+	// Check Zone
 	const float metersDisplaced = m_OffsetY/PIXELS_IN_METER;
-	if (m_Zone != ZONE_B && metersDisplaced >= metersToZoneB && metersDisplaced < metersToZoneC)
-	{
-		m_pCore->SoundManager()->playBackgroundMusic(CSoundManager::MUSIC_ZONE_B);
-		m_pCore->setBackgroundColor(sf::Color(0, 11, 24));
-		m_Zone = ZONE_B;
-	}
-	else if (m_Zone != ZONE_C && metersDisplaced >= metersToZoneC && metersDisplaced < metersToZoneD)
-	{
-		m_pCore->SoundManager()->playBackgroundMusic(CSoundManager::MUSIC_ZONE_C);
-		m_pCore->setBackgroundColor(sf::Color(0, 27, 55));
-		m_Zone = ZONE_C;
-	}
-	else if (m_Zone != ZONE_D && metersDisplaced >= metersToZoneD)
-	{
-		m_pCore->SoundManager()->playBackgroundMusic(CSoundManager::MUSIC_FINAL_BOSS);
-		m_pCore->setBackgroundColor(sf::Color(25, 6, 6));
-		m_Zone = ZONE_D;
-	}
+	if (metersDisplaced >= metersToZone[m_Zone+1])
+		setZone(m_Zone+1);
 
 	genMapZone();
 	renderMap();
 
-	#ifdef DEBUG_MODE
+	if (m_pCore->m_Config.m_Debug)
 		renderGrid();
-	#endif
 }
 
 void CMap::genMapZone()
@@ -125,10 +111,10 @@ void CMap::genMapZone()
 		{
 			if (m_Zone == ZONE_A || m_Zone == ZONE_C)
 			{
-				for (int e=0; e<SIZE_W; pNewTiles[i*m_Width+e++].m_Index = CTile::SOLID); // Clean Line
-
 				if (i<nums)
 				{
+					for (int e=0; e<SIZE_W; pNewTiles[i*m_Width+e++].m_Index = CTile::SOLID); // Clean Line
+
 					m_GenDir = vur;
 					m_WayPosW += m_GenDir;
 
@@ -483,9 +469,39 @@ void CMap::renderMap()
 	}
 }
 
+void CMap::setZone(int zone)
+{
+	if (zone < 0 || zone >= NUM_ZONES)
+		return;
+
+	m_Zone = zone;
+	m_OffsetY = metersToZone[m_Zone]*PIXELS_IN_METER;
+
+	if (m_Zone == ZONE_A)
+	{
+		m_pCore->SoundManager()->playBackgroundMusic(CSoundManager::MUSIC_ZONE_A);
+		m_pCore->setBackgroundColor(sf::Color::Black);
+	}
+	if (m_Zone == ZONE_B)
+	{
+		m_pCore->SoundManager()->playBackgroundMusic(CSoundManager::MUSIC_ZONE_B);
+		m_pCore->setBackgroundColor(sf::Color(0, 11, 24));
+	}
+	if (m_Zone == ZONE_C)
+	{
+		m_pCore->SoundManager()->playBackgroundMusic(CSoundManager::MUSIC_ZONE_C);
+		m_pCore->setBackgroundColor(sf::Color(0, 27, 55));
+	}
+	if (m_Zone == ZONE_D)
+	{
+		m_pCore->SoundManager()->playBackgroundMusic(CSoundManager::MUSIC_FINAL_BOSS);
+		m_pCore->setBackgroundColor(sf::Color(25, 6, 6));
+	}
+}
+
 void CMap::renderGrid()
 {
-    for (int i=0; i<=SIZE_W; i++)
+    for (int i=0; i<SIZE_W; i++)
     {
         sf::Vertex line[] =
         {
@@ -495,7 +511,7 @@ void CMap::renderGrid()
 
         m_pCore->Window()->draw(line, 2, sf::Lines);
     }
-    for (int i=0; i<=SIZE_H; i++)
+    for (int i=0; i<SIZE_H; i++)
     {
         sf::Vertex line[] =
         {
@@ -507,7 +523,7 @@ void CMap::renderGrid()
     }
 }
 
-CTile* CMap::getTileAt(sf::Vector2f pos)
+CTile* CMap::getTileAt(sf::Vector2f &pos)
 {
 	int x = (int)pos.x/TILE_SIZE;
 	int y = (int)(pos.y-(int)m_OffsetY%TILE_SIZE)/TILE_SIZE;

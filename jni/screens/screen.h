@@ -58,6 +58,7 @@ protected:
 	std::list<CParticle*> m_vpParticles;
 
 	void renderBack();
+	void render();
 	void renderFront();
 
 private:

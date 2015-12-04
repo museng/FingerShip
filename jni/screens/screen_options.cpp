@@ -5,6 +5,7 @@
 #include "../engine/game_core.h"
 #include "../engine/locale.h"
 #include "../engine/effects.h"
+#include "../engine/android_utils.h"
 
 CScreenOptions::CScreenOptions(int camW, int camH)
 : CScreen(camW, camH)
@@ -41,6 +42,7 @@ void CScreenOptions::tick()
 	}
 
 	CScreen::renderBack();
+	CScreen::render();
 	CScreen::renderFront();
 
 	sf::RectangleShape btnBack(sf::Vector2f(TILE_SIZE*3, TILE_SIZE));
@@ -227,6 +229,7 @@ void CScreenOptions::tick()
 
 	// Actions in Screen
 	static bool tap = false;
+	static short debug_counts = 0;
     if (m_InputActive && sf::Touch::isDown(0) && !tap)
     {
     	sf::Vector2f convCoords = Core()->Window()->mapPixelToCoords(sf::Touch::getPosition(0));
@@ -238,12 +241,12 @@ void CScreenOptions::tick()
     	else if (checkVibration.getGlobalBounds().contains(convCoords) || textVibration.getGlobalBounds().contains(convCoords))
     	{
     		Core()->SoundManager()->play(CSoundManager::SOUND_MENU_CHECK);
-    		Core()->m_Config.m_Vibration = !Core()->m_Config.m_Vibration;
+    		Core()->m_Config.m_Vibration ^= 1;
     	}
     	else if (checkLowGraphs.getGlobalBounds().contains(convCoords) || textLowGraph.getGlobalBounds().contains(convCoords))
     	{
     		Core()->SoundManager()->play(CSoundManager::SOUND_MENU_CHECK);
-    		Core()->m_Config.m_LowGraphics = !Core()->m_Config.m_LowGraphics;
+    		Core()->m_Config.m_LowGraphics ^= 1;
     	}
     	else if (checkSounds.getGlobalBounds().contains(convCoords) || textSounds.getGlobalBounds().contains(convCoords))
     	{
@@ -269,6 +272,18 @@ void CScreenOptions::tick()
     	{
     		Core()->SoundManager()->play(CSoundManager::SOUND_MENU_CHECK);
     		Core()->m_Config.m_Language = LANGUAGE_GAL;
+    	}
+    	else if (sfml.getGlobalBounds().contains(convCoords) && !Core()->m_Config.m_Debug)
+    	{
+    		debug_counts++;
+    		if (debug_counts == 3)
+    		{
+				Core()->m_Config.m_Debug = 1;
+				Core()->SoundManager()->play(CSoundManager::SOUND_SPACEMAN);
+				CAndroidUtils::vibrate(sf::milliseconds(100));
+    		}
+
+    		Core()->SoundManager()->play(CSoundManager::SOUND_MENU_SELECT_B);
     	}
 
     	tap = true;

@@ -1,10 +1,11 @@
-/* (c) Alexandre Díaz. See licence.txt in the root of the distribution for more information. */
+/* (c) Alexandre Dï¿½az. See licence.txt in the root of the distribution for more information. */
 /* If you are missing that file, acquire a complete release at fingership.redneboa.es        */
 
 #include "screen_game_finished.h"
 #include "../engine/game_core.h"
 #include "../engine/locale.h"
 #include "../engine/effects.h"
+#include "../engine/android_utils.h"
 #include <cmath>
 
 CScreenGameFinished::CScreenGameFinished(int camW, int camH)
@@ -23,11 +24,13 @@ void CScreenGameFinished::tick()
 	if (m_FireworksTimer.getElapsedTime().asMilliseconds() > 675)
 	{
 		Core()->SoundManager()->play(CSoundManager::SOUND_FIREWORK);
+		CAndroidUtils::vibrate(sf::milliseconds(20));
 		CEffects::createFirework(sf::Vector2f(random_int(0, RSIZE_W), random_int(0, RSIZE_H)));
 		m_FireworksTimer.restart();
 	}
 
 	CScreen::renderBack();
+	CScreen::render();
 	CScreen::renderFront();
 
 	char buff[15];

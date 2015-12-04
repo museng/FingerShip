@@ -4,6 +4,7 @@
 #ifndef H_GAME_CORE
 #define H_GAME_CORE
 #include <android/log.h>
+#include <engine/data_file.h>
 
 #include <SFML/System/NativeActivity.hpp>
 #include <SFML/System.hpp>
@@ -14,7 +15,6 @@
 #include "player.h"
 #include "texture_manager.h"
 #include "sound_manager.h"
-#include "sqlite.h"
 #include "../entities/entity.h"
 #include "../screens/screen.h"
 #include <list>
@@ -40,7 +40,6 @@
 #define PIXELS_IN_METER 		3779.0f
 #define MAX_METERS				15.0f
 
-#define DEBUG_MODE
 
 enum
 {
@@ -70,11 +69,7 @@ public:
 
 	~CGameCore();
 
-	struct {
-		bool m_LowGraphics;
-		bool m_Vibration;
-		short m_Language;
-	} m_Config;
+	CConfigFile m_Config;
 
 	bool m_TurretKilled;
 	bool m_MineKilled;
@@ -145,8 +140,6 @@ private:
 	class CScreen *m_pNextScreen;
 	int m_LastScreenId;
 	int m_CurrentScreenId;
-
-	CSqlite m_DataBase;
 
 	bool m_Paused;
 	bool m_WinFocus;

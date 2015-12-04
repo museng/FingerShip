@@ -15,6 +15,7 @@
 
 CGameCore* CGameCore::m_pCoreInstance = nullptr;
 CGameCore::CGameCore()
+: m_Config("game.dat")
 {
 	m_pWindow = nullptr;
 	m_pPlayer = nullptr;
@@ -37,9 +38,6 @@ CGameCore::CGameCore()
 	m_DronLaserKilled = false;
 	m_SpacemanRescue = false;
 
-	m_Config.m_LowGraphics = false;
-	m_Config.m_Language = LANGUAGE_ES;
-	m_Config.m_Vibration = true;
 	m_WinFocus = true;
 	m_Paused = false;
 	m_FrameTime = 0.0f;
@@ -79,9 +77,6 @@ void CGameCore::init()
 
 	m_pSoundManager = new CSoundManager();
 	if (!m_pSoundManager || !m_pSoundManager->load())
-		++loadErrors;
-
-	if (!m_DataBase.init())
 		++loadErrors;
 	//
 
